@@ -1,0 +1,1 @@
+window.abstract = -> throw new Exception 'Can not call abstract method'

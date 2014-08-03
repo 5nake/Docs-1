@@ -1,0 +1,192 @@
+.file-list {
+  padding: 20px 19px !important;
+  width: $width - 182px;
+  position: relative;
+  height: 100%;
+
+  .file-preview {
+    @include transition(.3s $ease-swift-out);
+    height: 0;
+    width: 100%;
+    box-shadow: 0 1px 0 rgba(#000, 0);
+    overflow: hidden;
+    margin-bottom: 0;
+
+    table {
+      width: 100%;
+      td {
+        vertical-align: top;
+        &:first-child {
+          width: 140px;
+        }
+      }
+      .file-preview-text {
+        padding-right: 15px;
+        width: 305px;
+
+        .clear {
+          height: 15px;
+        }
+      }
+    }
+
+    .file-preview-text {
+      .file-preview-title {
+        margin: 15px 0 0 0;
+        padding: 0 5px;
+        @include font(title);
+        color: #222;
+        height: 40px;
+        width: 290px;
+        box-shadow: 0 2px 0 #5481a2;
+
+        &:focus {
+          box-shadow: 0 2px 0 #222;
+        }
+
+        @include selection {
+          background: saturate(lighten(#5481a2, 20%), 20%);
+          color: #fff;
+          border-radius: 2px;
+        }
+      }
+      .button {
+        margin-right: 6px;
+      }
+    }
+
+    .file-preview-icon {
+      width: 120px;
+      height: 90px;
+      overflow: hidden;
+      border-radius: 3px;
+      background: #e2dfd2;
+      margin: 15px 5px;
+      float: left;
+
+      img {
+        width: inherit;
+        height: inherit;
+      }
+    }
+
+    &.file-preview-shown {
+      height: 120px;
+      box-shadow: 0 1px 0 rgba(#000, .1);
+      margin-bottom: 10px;
+    }
+
+    .file-preview-info {
+      display: block;
+      padding: 2px 0;
+      font-weight: bold;
+
+      .file-preview-public,
+      .file-preview-private {
+        color: #fff;
+        padding: 0 4px;
+        border-radius: 2px;
+      }
+      .file-preview-public {
+        background: #a72525;
+      }
+      .file-preview-private {
+        background: #56741e;
+      }
+
+      span {
+        font-weight: normal;
+        float: right;
+      }
+    }
+
+  }
+
+  .no-files {
+    display: block;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    height: 38px;
+    top: 50%;
+    margin-top: -19px;
+  }
+
+  .file-preload {
+    width: 100%;
+    height: 80%;
+    position: absolute;
+    background: url(/img/preload/x128.load.gif) center center no-repeat;
+    background-size: 24px auto;
+  }
+
+  .file-item {
+    width: 160px;
+    height: 150px;
+    float: left;
+    margin: 5px;
+    cursor: pointer;
+
+    .file-item-preview {
+      width: 160px;
+      height: 120px;
+      border-radius: 3px;
+      background: #e2dfd2;
+      overflow: hidden;
+      position: relative;
+      @include transition(.3s $ease-swift-out);
+
+      .file-item-updated {
+        color: #900;
+        @include font(title);
+        font-weight: bold;
+        position: absolute;
+        font-size: 42px;
+        z-index: 3;
+        top: -5px;
+        right: 5px;
+        -webkit-text-stroke: #900 .3px;
+        text-shadow:
+          0 -1px 0 rgba(#fff, .3),
+          0  1px 0 rgba(#000, .6)
+        ;
+      }
+
+      .no-preview {
+        width: 160px;
+        height: 120px;
+      }
+
+      .preview-extension {
+        position: absolute;
+        z-index: 3;
+        left: 0;
+        @include font(title);
+        width: 160px;
+        text-align: center;
+        color: #fff;
+        top: 38px;
+        font-size: 30px;
+        text-shadow: 0 0 2px rgba(#000, .2);
+      }
+    }
+
+    .file-item-title {
+      padding: 5px;
+      display: block;
+      width: 150px;
+      @include font(title);
+      font-weight: bold;
+      font-size: 17px;
+      height: 20px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    &:hover {
+      .file-item-preview {
+        @include transform(scale(.95));
+      }
+    }
+  }
+}

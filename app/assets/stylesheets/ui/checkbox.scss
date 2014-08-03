@@ -1,0 +1,15 @@
+input[type=checkbox] {
+  position: relative;
+  top: 11px;
+  float: left;
+  @include appearance(none);
+  width: 12px;
+  height: 12px;
+  background: lighten(#5481a2, 25%);
+  outline: none;
+  display: inline-block;
+
+  &:checked {
+    background: #fff url(/img/ui/checked.png?v=1) center center no-repeat;
+  }
+}
