@@ -27,7 +27,7 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment([
     'local' => [
         'verstalkid',
-        #'Serafim-PC'
+        'Serafim-PC'
     ],
 ]);
 

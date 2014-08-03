@@ -8,9 +8,8 @@ namespace global:
       obj = ko.mapping.fromJS data
       @[key] = val for key, val of obj
 
-
       @updated = ko.observable false
-
+      @saved   = ko.observable false
 
       # Автоиспавление заголовка
       @title.subscribe (v) =>
@@ -37,11 +36,13 @@ namespace global:
       (parts = @path().split('.'))[parts.length - 1]
 
     changePermissions: =>
-      if (@permissions()|0) is 1
-        @permissions(2)
-      else
-        @permissions(1)
-      @save()
+      if @saved() is false
+        if (@permissions()|0) is 1
+          @permissions(2)
+        else
+          @permissions(1)
+        do @save
+
 
     remove: ->
       app('async').post '/upload/delete/' + @id(), {_token: app('csrf'), ajax: true}, (response) =>
@@ -49,7 +50,8 @@ namespace global:
           UplFile.remove (item) =>
             return item.id() is @id()
 
-    save: ->
+    save: (cb = (->))->
+      @saved true
       data = {
         _token: app('csrf'),
         ajax: true
@@ -65,7 +67,10 @@ namespace global:
         if response.status is 'success'
           for key, d of response.data.file
             @[key] d
+            @getCache('data')[key] = d
           @updated false
+        @saved false
+        cb response
 
     getLink: ->
       '//' + document.location.host + '/d/' + @token()

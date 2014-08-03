@@ -12,17 +12,45 @@ class Preview
     const PREVIEW_WIDTH     = 160;
     const PREVIEW_HEIGHT    = 120;
     const PREVIEW_UPLOADS   = '/uploads/';
-    const PREVIEW_PATH      = '/img/icons/undefined.png';
+    const PREVIEW_PATH      = '/img/formats/default.png';
     const PREVIEW_EXT       = 'jpg';
 
     /**
      * @var array
      */
     protected $types = [
-        'image/jpeg'    => 'createImagePreview',
-        'image/jpg'     => 'createImagePreview',
-        'image/gif'     => 'createImagePreview',
-        'image/png'     => 'createImagePreview',
+        'image/jpeg'                => 'createImagePreview',
+        'image/pjpeg'               => 'createImagePreview',
+        'image/gif'                 => 'createImagePreview',
+        'image/png'                 => 'createImagePreview',
+
+        'video/mpeg'                => 'createVideoPreview',
+        'video/mp4'                 => 'createVideoPreview',
+        'video/ogg'                 => 'createVideoPreview',
+        'video/quicktime'           => 'createVideoPreview',
+        'video/webm'                => 'createVideoPreview',
+        'video/x-ms-wmv'            => 'createVideoPreview',
+        'video/x-flv'               => 'createVideoPreview',
+
+
+        'audio/basic'               => 'createAudioPreview',
+        'audio/L24'                 => 'createAudioPreview',
+        'audio/mp4'                 => 'createAudioPreview',
+        'audio/mpeg'                => 'createAudioPreview',
+        'audio/ogg'                 => 'createAudioPreview',
+        'audio/vorbis'              => 'createAudioPreview',
+        'audio/x-ms-wma'            => 'createAudioPreview',
+        'audio/x-ms-wax'            => 'createAudioPreview',
+        'audio/vnd.rn-realaudio'    => 'createAudioPreview',
+        'audio/vnd.wave'            => 'createAudioPreview',
+        'audio/webm'                => 'createAudioPreview',
+
+
+        'application/x-msdownload'  => 'createBinariesPreview',
+        'application/zip'           => 'createBinariesPreview',
+        'application/x-gzip'        => 'createBinariesPreview',
+        'application/octet-stream'  => 'createBinariesPreview',
+        'application/x-dosexec'     => 'createBinariesPreview',
     ];
 
     /**
@@ -73,6 +101,34 @@ class Preview
         $img->save(public_path($dest->path . $dest->name));
 
         return $dest->path . $dest->name;
+    }
+
+    /**
+     * @param $path
+     * @return string
+     */
+    public function createVideoPreview($path)
+    {
+        return '/img/formats/video.png';
+    }
+
+
+    /**
+     * @param $path
+     * @return string
+     */
+    public function createBinariesPreview($path)
+    {
+        return '/img/formats/binaries.png';
+    }
+
+    /**
+     * @param $path
+     * @return string
+     */
+    public function createAudioPreview($path)
+    {
+        return '/img/formats/audio.png';
     }
 
 

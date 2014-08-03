@@ -27,9 +27,6 @@
         </td>
         <td>
             <div class="file-preview-info">
-                Название: <span data-bind="text: preview().title"></span>
-            </div>
-            <div class="file-preview-info">
                 Размер: <span data-bind="text: (preview().size()/1024).toFixed(2) + 'Kb'"></span>
             </div>
             <div class="file-preview-info">
@@ -41,6 +38,9 @@
             </div>
             <div class="file-preview-info">
                 Тип: <span data-bind="text: preview().mime"></span>
+            </div>
+            <div class="file-preview-info">
+                Загружено: <span data-bind="text: preview().created_at"></span>
             </div>
             <div class="file-preview-info">
                 Изменено: <span data-bind="text: preview().updated_at"></span>

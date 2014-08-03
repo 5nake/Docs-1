@@ -35,6 +35,8 @@
                     <!--ko foreach: files-->
                         <article class="file-item" data-bind="click: function(){
                             $root.preview($data)
+                        }, attr: {
+                            title: title() + ' (' + ((size()/1024).toFixed(2)) + 'Kb)'
                         }">
                             <div class="file-item-preview">
                                 <!--ko if: updated-->
