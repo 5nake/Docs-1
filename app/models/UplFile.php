@@ -7,4 +7,6 @@ class UplFile extends Eloquent
     const PERM_PRIVATE = 2;
 
     protected $table = 'files';
+
+    protected $fillable = ['path', 'sync_server'];
 }

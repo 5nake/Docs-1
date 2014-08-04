@@ -4,15 +4,16 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "laravel/framework": "4.2.*",
-        "serafim/asset": "dev-master@dev",
+        "laravel/framework":    "4.2.*",
+        "serafim/asset":        "dev-master@dev",
         "barryvdh/laravel-ide-helper": "1.*",
         "coffeescript/coffeescript": "1.3.1",
-        "leafo/scssphp": "dev-master",
-        "rudev/api": "dev-master",
-        "linkorb/jsmin-php": "1.0.0",
-        "natxet/cssmin": "dev-master",
-        "intervention/image": "2.*"
+        "leafo/scssphp":        "dev-master",
+        "rudev/api":            "dev-master",
+        "linkorb/jsmin-php":    "1.0.0",
+        "natxet/cssmin":        "dev-master",
+        "intervention/image":   "2.*",
+        "sabre/dav":            "2.*"
     },
     "autoload": {
         "classmap": [
@@ -24,7 +25,8 @@
             "app/tests/TestCase.php"
         ],
         "psr-4": {
-            "RuDev\\": "app/lib/RuDev"
+            "RuDev\\":  "app/lib/RuDev",
+            "Ya\\":     "app/lib/Ya"
         }
     },
     "scripts": {

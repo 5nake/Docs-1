@@ -11,48 +11,46 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
  */
 class Render
 {
-    /**
-     * @var array
-     */
-    protected $types = [
-        'image/jpeg'    => 'createImageRender',
-        'image/jpg'     => 'createImageRender',
-        'image/gif'     => 'createImageRender',
-        'image/png'     => 'createImageRender',
-    ];
-
-
     protected $file;
 
+    protected $fsync;
 
+    /**
+     * @param $file
+     */
     public function __construct($file)
     {
+        $this->fsync = (new FileSync());
+
         $this->file = $file;
     }
 
+    /**
+     * @return BinaryFileResponse
+     */
     public function getResponse()
     {
-        if (isset($this->types[$this->file->mime])) {
-            $method = $this->types[$this->file->mime];
-            return $this->$method();
-        }
-
-        return Response::download(
-            public_path($this->file->path),
-            $this->file->title
+        $response = Response::make(
+            $this->fsync->download($this->file),
+            200,
+            [
+                'Content-Type' => $this->file->mime,
+                'Content-Disposition' => sprintf(
+                    'inline; filename="%s"',
+                    \Str::ascii($this->file->title)
+                )
+            ]
         );
-    }
-
-    protected function createImageRender()
-    {
-        $response = new BinaryFileResponse(public_path(
-            $this->file->path
-        ));
-        $response->setContentDisposition('inline');
+        #$disposition, $name, Str::ascii($name)
         $response->setTtl(300);
         return $response;
     }
 
+
+    /**
+     * @param $file
+     * @return mixed
+     */
     public static function create($file)
     {
         return (new static($file))->getResponse();
