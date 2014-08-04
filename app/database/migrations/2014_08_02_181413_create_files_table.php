@@ -14,7 +14,7 @@ class CreateFilesTable extends Migration
             $t->string('path');
             $t->string('token');
             $t->string('mime');
-            $t->string('size');
+            $t->bigInteger('size');
             $t->string('preview')
               ->nullable();
 
