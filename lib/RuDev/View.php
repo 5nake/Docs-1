@@ -28,7 +28,10 @@ class View
     const ERROR_VIEW            = 'error.default';
     const DEFAULT_ERR_TITLE     = 'Something went wrong';
     const DEFAULT_ERR_MESSAGE   = 'Undefined error';
-    const DEFAULT_TITLE         = 'RuDev Docs';
+
+    protected static $defaultArgs = [
+        'title' => 'RuDev Docs'
+    ];
 
     /**
      * @param null $view
@@ -90,9 +93,7 @@ class View
      */
     protected static function view($name, $args = [], $code = null)
     {
-        $args = array_merge([
-                'title' => self::DEFAULT_TITLE
-            ], $args);
+        $args = array_merge(self::$defaultArgs, $args);
         foreach ($args as $argName => $val) { V::share($argName, $val); }
 
 

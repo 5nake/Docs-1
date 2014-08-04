@@ -24,7 +24,7 @@
             "app/tests/TestCase.php"
         ],
         "psr-4": {
-            "RuDev\\": "app/lib/RuDev"
+            "RuDev\\": "lib/RuDev"
         }
     },
     "scripts": {

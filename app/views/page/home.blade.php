@@ -1,4 +1,5 @@
 @section('content')
+    @include('partial.header')
     @include('partial.uploads')
     <section class="container files">
         <aside class="targets" data-controller="NavController">

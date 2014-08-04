@@ -15,10 +15,10 @@ class Render
      * @var array
      */
     protected $types = [
-        'image/jpeg'    => 'createImageRender',
-        'image/jpg'     => 'createImageRender',
-        'image/gif'     => 'createImageRender',
-        'image/png'     => 'createImageRender',
+        'image/jpeg'    => 'RuDev\Render\Image',
+        'image/jpg'     => 'RuDev\Render\Image',
+        'image/gif'     => 'RuDev\Render\Image',
+        'image/png'     => 'RuDev\Render\Image',
     ];
 
 
@@ -33,24 +33,14 @@ class Render
     public function getResponse()
     {
         if (isset($this->types[$this->file->mime])) {
-            $method = $this->types[$this->file->mime];
-            return $this->$method();
+            $render = new $this->types[$this->file->mime]($this->file);
+            return $render->response();
         }
 
         return Response::download(
             public_path($this->file->path),
             $this->file->title
         );
-    }
-
-    protected function createImageRender()
-    {
-        $response = new BinaryFileResponse(public_path(
-            $this->file->path
-        ));
-        $response->setContentDisposition('inline');
-        $response->setTtl(300);
-        return $response;
     }
 
     public static function create($file)

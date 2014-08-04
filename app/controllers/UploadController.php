@@ -7,7 +7,7 @@ use RuDev\Render;
 /**
  * Class HomeController
  */
-class UploaderController extends BaseController
+class UploadController extends BaseController
 {
     /**
      * @return array
