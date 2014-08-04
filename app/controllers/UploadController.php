@@ -15,6 +15,8 @@ class UploadController extends BaseController
      */
     public function upload()
     {
+        set_time_limit(0);
+
         $files  = Input::file('files');
         $result = [];
 

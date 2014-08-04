@@ -15,6 +15,8 @@ class DownloadController extends BaseController
      */
     public function download($token)
     {
+        set_time_limit(0);
+
         $file = UplFile::where('token', '=', $token)->first();
         if (!$file) { return View::error('File not Found'); }
         if (($file->permissions == UplFile::PERM_PRIVATE) &&
@@ -32,6 +34,8 @@ class DownloadController extends BaseController
      */
     public function stream($token)
     {
+        set_time_limit(0);
+
         $file = UplFile::where('token', '=', $token)->first();
         if (!$file) { return View::error('File not Found'); }
         if (($file->permissions == UplFile::PERM_PRIVATE) &&
