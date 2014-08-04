@@ -1,7 +1,7 @@
 {Exception} = Raid.Exception
 {Async}     = Raid.Request
 
-class Application
+class window.Application
   CONTROLLER_NS = window
 
   constructor: ->
@@ -18,7 +18,10 @@ class Application
         throw new Exception "Undefined controller `#{name}`"
       ko.applyBindings(@[name] = new controller(dom), dom)
 
-
+  filter: (d) ->
+    if d? && d.data? && d.data.volume?
+      app('HeaderController').volume d.data.volume.current
+      app('HeaderController').maxVolume d.data.volume.max
 
 
 

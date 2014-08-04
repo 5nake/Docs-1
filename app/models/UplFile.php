@@ -10,6 +10,8 @@ class UplFile extends Eloquent
 
     public static function getSize($user)
     {
-        #self::
+        return DB::table('files')
+            ->where('user_id', $user->id)
+            ->sum('size');
     }
 }

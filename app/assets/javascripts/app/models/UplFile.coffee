@@ -46,6 +46,8 @@ namespace global:
 
     remove: ->
       app('async').post '/upload/delete/' + @id(), {_token: app('csrf'), ajax: true}, (response) =>
+        app('filter') d
+
         if response.status is 'success'
           UplFile.remove (item) =>
             return item.id() is @id()
@@ -64,6 +66,8 @@ namespace global:
         data.permissions = @permissions()
 
       app('async').post '/upload/update/' + @id(), data, (response) =>
+        app('filter') d
+
         if response.status is 'success'
           for key, d of response.data.file
             @[key] d

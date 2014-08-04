@@ -109,6 +109,35 @@ header {
     float: left;
   }
 
+  .memory-indicator {
+    float: right;
+    padding: 12px 20px 0 20px;
+    @include box-sizing(border-box);
+    height: 44px;
+
+    .memory-indicator-content {
+      background: #f3f3f3;
+      height: 5px;
+      width: 200px;
+      box-shadow: inset 0 1px 0 rgba(#000, .1);
+
+      .memory-indicator-line-in {
+        box-shadow: inset 0 0 0 1px rgba(#000, .1);
+        height: inherit;
+        width: 10%;
+        background: #5481a2;
+        @include transition(width .3s ease);
+      }
+    }
+
+    span {
+      padding-top: 5px;
+      font-size: 10px;
+      display: block;
+      color: #666;
+    }
+  }
+
   .user {
     float: right;
     img {

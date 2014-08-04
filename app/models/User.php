@@ -17,6 +17,17 @@ class User extends Eloquent
     protected $hidden = ['password', 'remember_token'];
 
 
+    public function getMaxVolumeAttribute()
+    {
+        return 1024*1024*1024;
+    }
+
+    public function getCurrentVolumeAttribute()
+    {
+        return UplFile::getSize($this);
+    }
+
+
     public static function createFromResponse($data)
     {
         $u = User

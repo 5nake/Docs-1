@@ -31,6 +31,8 @@ namespace global:
 
         app('async').raw = true
         app('async').post '/upload', data, (d) =>
+          app('filter') d
+
           @uploadedProgress false
           for file in @files()
             `delete file`

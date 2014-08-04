@@ -27,6 +27,8 @@ namespace global:
 
     init: ->
       app('async').get '/upload/all', {ajax: true}, (d) =>
+        app('filter') d
+
         for i in d.data.files
           UplFile.push i
         @files do UplFile.all

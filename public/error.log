@@ -4,3 +4,40 @@
 [04-Aug-2014 12:03:43 Europe/Moscow] PHP Warning:  POST Content-Length of 11995581 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
 [04-Aug-2014 12:04:07 Europe/Moscow] PHP Warning:  POST Content-Length of 11995581 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
 [04-Aug-2014 12:04:31 Europe/Moscow] PHP Warning:  POST Content-Length of 8864025 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[04-Aug-2014 14:17:37 Europe/Moscow] PHP Warning:  POST Content-Length of 8864025 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[04-Aug-2014 10:38:28 UTC] PHP Fatal error:  Call to a member function where() on a non-object in F:\Rudev\Image\app\models\UplFile.php on line 15
+[04-Aug-2014 10:38:28 UTC] PHP Stack trace:
+[04-Aug-2014 10:38:28 UTC] PHP   1. {main}() F:\Rudev\Image\public\index.php:0
+[04-Aug-2014 10:38:28 UTC] PHP   2. Illuminate\Foundation\Application->run() F:\Rudev\Image\public\index.php:49
+[04-Aug-2014 10:38:28 UTC] PHP   3. Stack\StackedHttpKernel->handle() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:642
+[04-Aug-2014 10:38:28 UTC] PHP   4. Illuminate\Cookie\Guard->handle() F:\Rudev\Image\vendor\stack\builder\src\Stack\StackedHttpKernel.php:23
+[04-Aug-2014 10:38:28 UTC] PHP   5. Illuminate\Cookie\Queue->handle() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\Cookie\Guard.php:51
+[04-Aug-2014 10:38:28 UTC] PHP   6. Illuminate\Session\Middleware->handle() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\Cookie\Queue.php:47
+[04-Aug-2014 10:38:28 UTC] PHP   7. Illuminate\Foundation\Application->handle() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\Session\Middleware.php:72
+[04-Aug-2014 10:38:28 UTC] PHP   8. Illuminate\Foundation\Application->dispatch() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:746
+[04-Aug-2014 10:38:28 UTC] PHP   9. Illuminate\Routing\Router->dispatch() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\Foundation\Application.php:776
+[04-Aug-2014 10:38:28 UTC] PHP  10. Illuminate\Routing\Router->dispatchToRoute() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\Routing\Router.php:996
+[04-Aug-2014 10:38:28 UTC] PHP  11. Illuminate\Routing\Router->prepareResponse() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\Routing\Router.php:1031
+[04-Aug-2014 10:38:28 UTC] PHP  12. Symfony\Component\HttpFoundation\Response->__construct() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\Routing\Router.php:1497
+[04-Aug-2014 10:38:28 UTC] PHP  13. Illuminate\Http\Response->setContent() F:\Rudev\Image\vendor\symfony\http-foundation\Symfony\Component\HttpFoundation\Response.php:202
+[04-Aug-2014 10:38:28 UTC] PHP  14. Illuminate\View\View->render() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\Http\Response.php:43
+[04-Aug-2014 10:38:28 UTC] PHP  15. Illuminate\View\View->renderContents() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\View.php:76
+[04-Aug-2014 10:38:28 UTC] PHP  16. Illuminate\View\View->getContents() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\View.php:102
+[04-Aug-2014 10:38:28 UTC] PHP  17. Illuminate\View\View->gatherData() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\View.php:134
+[04-Aug-2014 10:38:28 UTC] PHP  18. Illuminate\View\View->render() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\View.php:150
+[04-Aug-2014 10:38:28 UTC] PHP  19. Illuminate\View\View->renderContents() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\View.php:76
+[04-Aug-2014 10:38:28 UTC] PHP  20. Illuminate\View\View->getContents() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\View.php:102
+[04-Aug-2014 10:38:28 UTC] PHP  21. Illuminate\View\Engines\CompilerEngine->get() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\View.php:134
+[04-Aug-2014 10:38:28 UTC] PHP  22. Illuminate\View\Engines\PhpEngine->evaluatePath() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\Engines\CompilerEngine.php:56
+[04-Aug-2014 10:38:28 UTC] PHP  23. include() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\Engines\PhpEngine.php:35
+[04-Aug-2014 10:38:28 UTC] PHP  24. Illuminate\View\View->render() F:\Rudev\Image\app\storage\views\a8c85e9806c239d0e2e9c2eeeed7bb89:2
+[04-Aug-2014 10:38:28 UTC] PHP  25. Illuminate\View\View->renderContents() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\View.php:76
+[04-Aug-2014 10:38:28 UTC] PHP  26. Illuminate\View\View->getContents() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\View.php:102
+[04-Aug-2014 10:38:28 UTC] PHP  27. Illuminate\View\Engines\CompilerEngine->get() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\View.php:134
+[04-Aug-2014 10:38:28 UTC] PHP  28. Illuminate\View\Engines\PhpEngine->evaluatePath() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\Engines\CompilerEngine.php:56
+[04-Aug-2014 10:38:28 UTC] PHP  29. include() F:\Rudev\Image\vendor\laravel\framework\src\Illuminate\View\Engines\PhpEngine.php:35
+[04-Aug-2014 10:38:28 UTC] PHP  30. UplFile::getSize() F:\Rudev\Image\app\storage\views\e12ca3b411e563d24b85abd75a9afb5a:8
+[04-Aug-2014 15:07:25 Europe/Moscow] PHP Warning:  POST Content-Length of 8864025 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[04-Aug-2014 15:08:22 Europe/Moscow] PHP Warning:  POST Content-Length of 9122136 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[04-Aug-2014 16:31:55 Europe/Moscow] PHP Warning:  POST Content-Length of 156040033 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[04-Aug-2014 16:39:52 Europe/Moscow] PHP Warning:  POST Content-Length of 147677725 bytes exceeds the limit of 8388608 bytes in Unknown on line 0

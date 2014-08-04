@@ -36,6 +36,14 @@ class UploadController extends BaseController
                 $size = $file->getSize();
                 $file->move(public_path($dest->path), $dest->name);
 
+                $available = Auth::user()->current_volume;
+
+
+                # Проверка на переполнение дисковой квоты
+                if ((int)$available + $size > Auth::user()->max_volume) {
+                    break;
+                }
+
 
                 $f = new UplFile;
                 $f->user_id     = Auth::user()->id;
@@ -58,7 +66,13 @@ class UploadController extends BaseController
             }
         }
 
-        return View::success(['files' => $result]);
+        return View::success([
+            'files' => $result,
+            'volume' => [
+                'current' => Auth::user()->current_volume,
+                'max' => Auth::user()->max_volume
+            ]
+        ]);
     }
 
     /**
@@ -71,7 +85,13 @@ class UploadController extends BaseController
         }
 
         $files = UplFile::where('user_id', '=', Auth::user()->id)->orderBy('created_at')->get();
-        return View::success(['files' => $files->toArray()]);
+        return View::success([
+            'files' => $files->toArray(),
+            'volume' => [
+                'current' => Auth::user()->current_volume,
+                'max' => Auth::user()->max_volume
+            ]
+        ]);
     }
 
     /**
@@ -107,7 +127,13 @@ class UploadController extends BaseController
         }
         $file->save();
 
-        return View::success(['file' => $file]);
+        return View::success([
+            'file' => $file,
+            'volume' => [
+                'current' => Auth::user()->current_volume,
+                'max' => Auth::user()->max_volume
+            ]
+        ]);
     }
 
     /**
@@ -140,26 +166,12 @@ class UploadController extends BaseController
             unlink(public_path($file->preview));
         }
         $file->delete();
-        return View::success('success');
-    }
-
-    /**
-     * @param $token
-     * @return array
-     */
-    public function download($token)
-    {
-        $file = UplFile::where('token', '=', $token)->first();
-        if (!$file) {
-            return View::error('File not Found');
-        }
-
-        if ($file->permissions == UplFile::PERM_PRIVATE) {
-            if (Auth::guest() || Auth::user()->id != $file->user_id) {
-                return View::error('Permission denied');
-            }
-        }
-
-        return Render::create($file);
+        return View::success([
+            'result' => 'success',
+            'volume' => [
+                'current' => Auth::user()->current_volume,
+                'max' => Auth::user()->max_volume
+            ]
+        ]);
     }
 }
