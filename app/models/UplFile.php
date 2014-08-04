@@ -7,4 +7,9 @@ class UplFile extends Eloquent
     const PERM_PRIVATE = 2;
 
     protected $table = 'files';
+
+    public static function getSize($user)
+    {
+        #self::
+    }
 }
