@@ -2,6 +2,11 @@
 Route::get('/',         ['as' => 'home',   'uses' => 'HomeController@index']);
 
 Route::get('/auth',     ['as' => 'auth',   'uses' => 'HomeController@auth']);
+Route::post('/login',   [
+    'before' => 'csrf',
+    'as' => 'login',
+    'uses' => 'HomeController@login'
+]);
 
 Route::get('/logout',   ['as' => 'logout', 'uses' => 'HomeController@logout']);
 

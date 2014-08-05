@@ -35,6 +35,19 @@ class HomeController extends BaseController
     }
 
     /**
+     * @return array|\Illuminate\Http\RedirectResponse
+     */
+    public function login()
+    {
+        Auth::attempt([
+            'login' => Input::get('login'),
+            'password' => Input::get('password')
+        ]);
+
+        return Redirect::route('home');
+    }
+
+    /**
      * @return \Illuminate\Http\RedirectResponse
      */
     public function auth()
