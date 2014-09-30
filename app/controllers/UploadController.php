@@ -57,7 +57,7 @@ class UploadController extends BaseController
                     ))->convert();
                 $f->size        = $size;
                 $f->path        = $dest->path . $dest->name;
-                $f->token       = Hash::make($dest->path . $dest->name);
+                $f->token       = md5(Hash::make($dest->path . $dest->name));
                 $f->mime        = $mime;
                 $f->save();
 
