@@ -1,0 +1,139 @@
+/**
+ * Grid System Core
+ * Licensed under GPL and MIT.
+ *
+ * @version 1.0
+ * @author Nesmeyanov Kirill aka Serafim
+ */
+
+
+/**
+ * Enable legacy browsers support
+ */
+$grid-legacy: false !default;
+
+/**
+ * Default grid size
+ */
+$grid-default: 12 !default;
+
+/**
+ * Available grid sizes
+ */
+$grid-sizes: (12, 24) !default;
+
+/**
+ * Max grid size
+ */
+$grid-max-width: 100% !default;
+
+/**
+ * Calculate cell
+ */
+@function getCellSize($size, $columns, $maxSize: $grid-max-width) {
+  @return $maxSize/$columns*$size;
+}
+
+/**
+ * Clearfix
+ */
+@mixin clear($legacy: $grid-legacy) {
+  @if $legacy {
+    &:after {
+      content: "\0020";
+      display: block;
+      height: 0;
+      clear: both;
+      overflow: hidden;
+      visibility: hidden;
+    }
+    *zoom: 1;
+  } @else {
+    &:after {
+      display: table;
+      width: 100%;
+      content: '';
+      clear: both;
+    }
+  }
+}
+
+/**
+ * Container style
+ */
+@mixin container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  @include clear($grid-legacy);
+
+  @content;
+}
+
+/**
+ * Create grid cell
+ */
+@mixin grid($size, $columns: $grid-default) {
+  @include box-sizing(border-box);
+  padding: 0 10px;
+  float: left;
+  display: block;
+  width: getCellSize($size, $columns);
+
+  &.first-child,
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &.last-child,
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+/**
+ * Generate grid system
+ */
+@mixin grid-system($columns: $grid-default) {
+  @for $size from 1 to $columns {
+    .grid-#{$size} {
+      @include grid($size, $columns);
+    }
+    .prefix-#{$size} {
+      margin-left: getCellSize($size, $columns);
+    }
+    .postfix-#{$size} {
+      margin-right: getCellSize($size, $columns);
+    }
+    .push-#{$size} {
+      position: relative;
+      left: getCellSize($size, $columns);
+    }
+    .pull-#{$size} {
+      position: relative;
+      right: getCellSize($size, $columns);
+    }
+  }
+}
+
+/**
+ * Global (default) grid
+ */
+.container {
+  @include container($grid-default) {}
+}
+@include grid-system($grid-default);
+
+
+/**
+ * Generate available grids
+ */
+@each $grid in $grid-sizes {
+  .container-#{$grid} {
+
+    @include container($grid) {
+      @include grid-system($grid);
+    }
+  }
+}
+

@@ -1,0 +1,11 @@
+@mixin blur($value: 2px)
+{
+          filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="#{int($value)}" /></filter></svg>#filter');
+  -webkit-filter: blur(2px);
+          filter: blur(2px);
+}
+
+@mixin filter($value)
+{
+  @include prefixed(filter, $value);
+}

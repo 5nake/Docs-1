@@ -1,0 +1,58 @@
+@mixin animation-name($animation)
+{
+  @include prefixed(animation-name, $animation);
+}
+
+@mixin animation-duration($duration: 3s)
+{
+  @include prefixed(animation-duration, $duration);
+}
+
+@mixin animation-transition($transition: ease)
+{
+  @include prefixed(animation-timing-function, $transition);
+}
+
+@mixin animation-iteration-count($iteration: infinite)
+{
+  @include prefixed(animation-iteration-count, $iteration);
+}
+
+@mixin animation-delay($delay: 0)
+{
+  @include prefixed(animation-delay, $delay);
+}
+
+@mixin animation-fill-mode($mode: forwards)
+{
+  @include prefixed(animation-fill-mode, $mode);
+}
+
+@mixin animation-play-state($state: null)
+{
+  @include prefixed(animation-play-state, $state);
+}
+
+@mixin animation-direction($state: null)
+{
+  @include prefixed(animation-direction, $state);
+}
+
+
+@mixin animation($animation, $duration: 3s, $transition: ease, $iteration: infinite, $delay: 0, $mode: forwards) {
+  @include animation-name       ($animation);
+  @include animation-duration   ($duration);
+  @include animation-transition ($transition);
+  @include animation-iteration-count  ($iteration);
+  @include animation-delay      ($delay);
+  @include animation-fill-mode  ($mode);
+}
+
+@mixin keyframes($name)
+{
+  @-webkit-keyframes #{$name} { @content; }
+  @-moz-keyframes #{$name}    { @content; }
+  @-ms-keyframes #{$name}     { @content; }
+  @-o-keyframes #{$name}      { @content; }
+  @keyframes #{$name}         { @content; }
+}

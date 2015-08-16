@@ -1,0 +1,34 @@
+@charset "utf-8";
+
+$fa-font-path: '/fonts';
+
+$size-height-ui:    28px;
+$size-width-ui:     200px;
+$size-width-window: 800px;
+
+@import "vendor/rudev/rudev";
+@import "vendor/animate/v1.0.0";
+@import "vendor/grid-system";
+@import "vendor/inline-system";
+@import "vendor/label-system";
+
+
+@import "layout/master";
+@import "layout/fonts";
+@import "layout/box";
+@import "layout/input";
+@import "layout/button";
+
+
+
+@import "pages/preloader";
+@import "pages/auth";
+@import "pages/auth-window";
+@import "pages/docs";
+
+
+footer {
+  margin: 10px 0 0 0;
+  padding: 15px 0;
+  box-shadow: 0 -1px 0 rgba(#000, .1);
+}

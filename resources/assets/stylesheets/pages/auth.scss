@@ -1,0 +1,32 @@
+.page-auth {
+  $padding: 20px;
+
+  max-width: $size-width-window;
+  height: 220px;
+  margin: -110px 0 0 -#{$size-width-window/2};
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  .box-content {
+    padding: 70px $padding;
+  }
+
+  .button-rudev {
+    position: relative;
+    width: 200px !important;
+    margin: 0 auto;
+
+    span {
+      display: block;
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      height: 24px;
+      width: 24px;
+      border-radius: 2px;
+      background: url(/img/logo.svg) center center no-repeat;
+      background-size: 24px 24px;
+    }
+  }
+}

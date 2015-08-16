@@ -1,0 +1,5 @@
+@mixin box-sizing($box-model: content-box)
+{
+  -moz-box-sizing: $box-model;
+  box-sizing: $box-model;
+}

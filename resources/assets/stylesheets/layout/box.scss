@@ -1,0 +1,16 @@
+.box-content {
+  background-color: #fff;
+  color: inherit;
+  padding: 20px;
+
+  .box-group {
+    margin-bottom: 15px;
+    @include clear;
+
+    .button,
+    input,
+    button {
+      width: 100%;
+    }
+  }
+}

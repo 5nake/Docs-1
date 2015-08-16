@@ -1,0 +1,7 @@
+$color-main:        #5481a2;
+$color-link:        #5481a2;
+$color-input:       #74777d;
+$color-input-focus: desaturate($color-main, 10%);
+
+$animation-swift: cubic-bezier(.55, 0, .1, 1);
+$swift: $animation-swift; // @alias

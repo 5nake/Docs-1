@@ -1,0 +1,104 @@
+// block-axis | inline-axis | horizontal | vertical
+@mixin box-orient($value)
+{
+  -khtml-box-orient: $value; // Safari 2.0
+  @include prefixed(box-orient, $value);
+}
+
+// normal | reverse
+@mixin box-direction($direction)
+{
+  @include prefixed(box-direction, $direction);
+}
+
+// [int]
+@mixin box-ordinal-group($ordinal)
+{
+  @include prefixed(box-ordinal-group, $ordinal);
+}
+
+// center | end | justify | start
+@mixin box-pack($value)
+{
+  @include prefixed(box-pack, $value);
+}
+
+// start | end | center | baseline | stretch
+@mixin box-align($value)
+{
+  @include prefixed(box-align, $value);
+}
+
+// [int]
+@mixin box-flex-group($value)
+{
+  @include prefixed(box-flex-group, $value);
+}
+
+// multiple | single
+@mixin box-lines($value)
+{
+  @include prefixed(box-lines, $value);
+}
+
+// multiple | single
+@mixin box-reflect($value)
+{
+  @include prefixed(box-reflect, $value);
+}
+
+// row | row-reverse | column | column-reverse
+@mixin flex-direction($value)
+{
+  @include prefixed(flex-direction, $value);
+}
+
+// [int]px,em,etc
+@mixin flex-basis($value)
+{
+  @include prefixed(flex-basics, $value);
+}
+
+// nowrap | wrap | wrap-reverse
+@mixin flex-wrap($value)
+{
+  @include prefixed(flex-wrap, $value);
+}
+
+// [int]
+@mixin flex-shrink($value)
+{
+  @include prefixed(flex-shrink, $value);
+}
+
+// [int]
+@mixin flex-grow($value)
+{
+  @include prefixed(flex-grow, $value);
+}
+
+@mixin display($value)
+{
+  @if $value == box {
+    display: -moz-box;
+    display: -webkit-box;
+    display: -ms-box;
+    display: box;
+
+  } @else if $value == flexbox {
+    display: -moz-flexbox;
+    display: -webkit-flexbox;
+    display: -ms-flexbox;
+    display: flexbox;
+
+  } @else if $value == flex {
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+
+  } @else {
+    display: $value;
+  }
+}
+

@@ -1,0 +1,31 @@
+@function comma-list($list: ()) {
+  @return join((), $list, comma);
+}
+
+@function int($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+@function first($list) {
+  @return nth($list, 1);
+}
+
+@function last($list) {
+  @return nth($list, length($list));
+}
+
+@function in-array($haystack, $needle)
+{
+  $needle: comma-list($needle);
+  $result: false;
+
+  @each $item in $haystack {
+    @each $n in $needle {
+      @if $item == $n {
+        $result: true;
+      }
+    }
+  }
+
+  @return $result;
+}

@@ -1,12 +1,3 @@
-/bootstrap/compiled.php
 /vendor
-composer.phar
-composer.lock
-.env.*.php
-.env.php
-.DS_Store
-Thumbs.db
-/*.iml
-/_ide_helper.php
-/.idea
-/app/database/*.sqlite
+/node_modules
+.env

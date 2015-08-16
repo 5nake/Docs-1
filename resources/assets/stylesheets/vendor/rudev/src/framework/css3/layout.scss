@@ -1,0 +1,64 @@
+@mixin gpu()
+{
+  @include transform(rotate3d(0, 0, 0, 0deg));
+}
+
+@mixin selection
+{
+  &::selection      { @content; }
+  &::-moz-selection { @content; }
+}
+
+@mixin placeholder
+{
+  &::-webkit-input-placeholder  { @content; }
+  &:-moz-placeholder            { @content; }
+  &::-moz-placeholder           { @content; }
+  &:-ms-input-placeholder       { @content; }
+  .placeholder                  { @content; }
+}
+
+// all | none
+@mixin user-select($select: all)
+{
+  @include prefixed(user-select, $select);
+}
+
+// border-box | padding-box | content-box
+@mixin background-clip($value: padding-box)
+{
+  @include prefixed(background-clip, $value);
+}
+
+// border-box | padding-box | content-box
+@mixin background-origin($value: content-box)
+{
+  @include prefixed(background-origin, $value);
+}
+
+
+@mixin clear($legacy: false)
+{
+  @if $legacy {
+    &:after {
+      content    : "\0020";
+      display    : block;
+      height     : 0;
+      clear      : both;
+      overflow   : hidden;
+      visibility : hidden;
+    }
+    *zoom: 1;
+  } @else {
+    &:after {
+      display: table;
+      width: 100%;
+      content: '';
+      clear: both;
+    }
+  }
+}
+
+@mixin clearfix($legacy: false) { @include clear($legacy); }
+
+.clear { @include clear; }

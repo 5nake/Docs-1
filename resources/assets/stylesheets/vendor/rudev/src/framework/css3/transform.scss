@@ -1,0 +1,25 @@
+@mixin transform($value)
+{
+  @include prefixed(transform, $value);
+}
+
+@mixin rotate($value: 45deg)
+{
+  @include prefixed(transform, rotate($value));
+}
+
+@mixin scale($value: 45deg)
+{
+  @include prefixed(transform, scale($value));
+}
+
+
+@mixin transform-origin($value)
+{
+  @include prefixed(transform-origin, $value);
+}
+
+@mixin backface-visibility($value)
+{
+  @include prefixed(backface-visibility, $value);
+}

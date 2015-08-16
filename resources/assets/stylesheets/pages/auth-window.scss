@@ -1,0 +1,73 @@
+.page-auth-window {
+  background: #f3f3f4;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .page-auth-profile {
+    width: 300px;
+    height: 100px;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -50px 0 0 -150px;
+
+    img {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      margin: -30px auto 0 auto;
+      display: block;
+      box-shadow: 0 0 0 6px #fff;
+      background: #fff;
+      position: relative;
+      z-index: 3;
+    }
+
+    h2 {
+      display: block;
+      text-align: center;
+      margin: 10px auto 0 auto;
+      font-size: 38px;
+      font-weight: 200;
+      position: relative;
+      z-index: 3;
+    }
+
+    .page-auth-profile-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      overflow: hidden;
+    }
+
+    .page-auth-profile-loader {
+      background: #e74c3c;
+      position: relative;
+      width: 120%;
+      left: -130%;
+      height: 100%;
+      opacity: 1;
+      @include transition(1s $swift);
+
+      &.ready {
+        left: 0;
+        opacity: 0;
+      }
+
+      &:after {
+        content: '';
+        @include rotate(15deg);
+        position: absolute;
+        top: -10px;
+        right: -15px;
+        background: #e74c3c;
+        width: 35px;
+        height: 120px;
+      }
+    }
+  }
+}

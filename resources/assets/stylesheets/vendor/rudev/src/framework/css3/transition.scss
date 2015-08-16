@@ -1,0 +1,6 @@
+@mixin transition($values...)
+{
+  @each $prefix in $prefixes {
+    #{$prefix}transition: prefixed($prefix, $values, $prefixed-keys);
+  }
+}

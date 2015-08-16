@@ -1,0 +1,204 @@
+@function lower-bound($range)
+{
+  @if length($range) <= 0 {
+    @return 0;
+  }
+  @return nth($range, 1);
+}
+
+
+@function upper-bound($range) 
+{
+  @if length($range) < 2 {
+    @return 999999999999;
+  }
+  @return nth($range, 2);
+}
+
+@function text-inputs($types: all, $selector: input)
+{
+  $return: ();
+  $all-text-input-types: text password date datetime datetime-local month week email number search tel time url color textarea;
+
+  @if $types == all {
+    $types: $all-text-input-types;
+  }
+
+  @each $type in $types {
+    @if $type == textarea {
+      @if $selector == input {
+        $return: append($return, unquote('#{$type}'), comma)
+      } @else {
+        $return: append($return, unquote('#{$type}#{$selector}'), comma)
+      }
+    } @else {
+      $return: append($return, unquote('#{$selector}[type="#{$type}"]'), comma)
+    }
+  }
+
+  @return $return;
+}
+
+
+@function convert-to-rem($value, $base-value: 8px) {
+  $value: int($value) / int($base-value) * 1rem;
+  @if ($value == 0rem) {
+    $value: 0;
+  }
+  // Turn 0rem into 0
+  @return $value;
+}
+
+@function data($attr)
+{
+  @return '[data-' + $attr + ']';
+}
+
+@function rem-calc($values, $base-value: 8px) {
+  $max: length($values);
+
+  @if $max == 1 {
+    @return convert-to-rem(nth($values, 1), $base-value);
+  }
+
+  $remValues: ();
+  @for $i from 1 through $max {
+    $remValues: append($remValues, convert-to-rem(nth($values, $i), $base-value));
+  }
+  @return $remValues;
+}
+
+
+@mixin side-radius($side, $radius: 4px)
+{
+  @if ($side == left or $side == right) {
+    -webkit-border-bottom-#{$side}-radius: $radius;
+    -webkit-border-top-#{$side}-radius: $radius;
+    border-bottom-#{$side}-radius: $radius;
+    border-top-#{$side}-radius: $radius;
+  } @else {
+    -webkit-#{$side}-left-radius: $radius;
+    -webkit-#{$side}-right-radius: $radius;
+    border-#{$side}-left-radius: $radius;
+    border-#{$side}-right-radius: $radius;
+  }
+}
+
+@mixin css-triangle($triangle-size, $triangle-color, $triangle-direction)
+{
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border: inset $triangle-size;
+  @if ($triangle-direction == top) {
+    border-color: $triangle-color transparent transparent transparent;
+    border-top-style: solid;
+  }
+  @if ($triangle-direction == bottom) {
+    border-color: transparent transparent $triangle-color transparent;
+    border-bottom-style: solid;
+  }
+  @if ($triangle-direction == left) {
+    border-color: transparent transparent transparent $triangle-color;
+    border-left-style: solid;
+  }
+  @if ($triangle-direction == right) {
+    border-color: transparent $triangle-color transparent transparent;
+    border-right-style: solid;
+  }
+}
+
+
+@mixin hamburger($width, $left, $top, $thickness, $gap, $color, $hover-color, $offcanvas) {
+  $tabbar-menu-icon-width: $width;
+  $opposite-direction: left;
+  $topbar-link-padding: 0;
+
+  span::after {
+    content: "";
+    position: absolute;
+    display: block;
+    height: 0;
+
+    @if $offcanvas {
+      @if $top {
+        top: $top;
+      } @else {
+        top: 50%;
+        margin-top: (-$width/2);
+      }
+      @if $left {
+        left: $left;
+      } @else {
+        left: ($tabbar-menu-icon-width - $width)/2;
+      }
+    } @else {
+      top: 50%;
+      margin-top: -($width/2);
+      #{$opposite-direction}: $topbar-link-padding;
+    }
+
+    box-shadow:
+      0 0 0 $thickness $color,
+      0 $gap + $thickness 0 $thickness $color,
+      0 (2 * $gap + 2*$thickness) 0 $thickness $color;
+    width: $width;
+  }
+  span:hover:after {
+    box-shadow:
+      0 0 0 $thickness $hover-color,
+      0 $gap + $thickness 0 $thickness $hover-color,
+      0 (2 * $gap + 2*$thickness) 0 $thickness $hover-color;
+  }
+}
+
+@mixin block-glowing-effect($selector: focus, $fade-time: 300ms, $glowing-effect-color: darken($color-main, .25)) {
+  transition: box-shadow $fade-time, border-color $fade-time ease-in-out;
+
+  &:#{$selector} {
+    box-shadow: 0 0 5px $glowing-effect-color;
+    border-color: $glowing-effect-color;
+  }
+}
+
+@mixin translate2d($horizontal: 0, $vertical: 0) {
+  transform: translate($horizontal, $vertical)
+}
+
+
+@mixin element-invisible {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+@mixin element-invisible-off {
+  position: static !important;
+  height: auto;
+  width: auto;
+  overflow: visible;
+  clip: auto;
+}
+
+$white: #FFFFFF !default;
+$ghost: #FAFAFA !default;
+$snow: #F9F9F9 !default;
+$vapor: #F6F6F6 !default;
+$white-smoke: #F5F5F5 !default;
+$silver: #EFEFEF !default;
+$smoke: #EEEEEE !default;
+$gainsboro: #DDDDDD !default;
+$iron: #CCCCCC !default;
+$base: #AAAAAA !default;
+$aluminum: #999999 !default;
+$jumbo: #888888 !default;
+$monsoon: #777777 !default;
+$steel: #666666 !default;
+$charcoal: #555555 !default;
+$tuatara: #444444 !default;
+$oil: #333333 !default;
+$jet: #222222 !default;
+$black: #000000 !default;

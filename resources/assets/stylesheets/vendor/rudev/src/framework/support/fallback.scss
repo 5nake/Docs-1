@@ -1,0 +1,37 @@
+$prefixed-keys:
+  transform,
+  transform-origin,
+  transition;
+
+$prefixed-values: ();
+
+$prefixes:
+  -webkit-,
+  -moz-,
+  -ms-,
+  -o-,
+  null;
+
+@function prefixed($prefix, $values, $prefixed: $prefixed-keys)
+{
+  $list: comma-list();
+  @each $val in $values {
+    @if in-array($prefixed, $val) {
+      $val: $prefix#{$val};
+    }
+    $list: append($list, $val);
+  }
+  @return $list;
+}
+
+@mixin prefixed($name, $value...)
+{
+  @each $prefix in $prefixes {
+    #{$prefix}#{$name}: prefixed($prefix, $value);
+  }
+}
+
+@mixin prefixed-only($prefixes)
+{
+  @content;
+}

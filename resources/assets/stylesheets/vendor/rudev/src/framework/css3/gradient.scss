@@ -1,0 +1,58 @@
+@function gradient-direction-from-native($direction)
+{
+  $result: $direction;
+  $direction: '#{$direction}';
+
+  @if $direction == 'to bottom' {
+    $result: top;
+  } @else if $direction == 'to top' {
+    $result: bottom;
+  } @else if $direction == 'to left' {
+    $result: right;
+  } @else if $direction == 'to right' {
+    $result: left;
+  }
+
+  @return $result;
+}
+
+@function gradient-direction-from-prefixed($direction)
+{
+  $result: $direction;
+  $direction: '#{$direction}';
+
+  @if $direction == 'top' {
+    $result: to bottom;
+  } @else if $direction == 'bottom' {
+    $result: to top;
+  } @else if $direction == 'left' {
+    $result: left;
+  } @else if $direction == 'right' {
+    $result: right;
+  }
+
+  @return $result;
+}
+
+@mixin linear-gradient-data($field, $prefix, $postfix, $direction, $colors)
+{
+  $first:     last(comma-list(first($colors)));
+  $prefixed:  gradient-direction-from-native($direction);
+  $native:    gradient-direction-from-prefixed($direction);
+
+  #{$field}: $prefix $first $postfix;
+  @each $p in $prefixes {
+    $dir: $prefixed;
+    @if $p != null {
+      $dir: $prefixed;
+    } @else {
+      $dir: $native;
+    }
+    #{$field}: $prefix #{$p}linear-gradient($dir, zip($colors)) $postfix;
+  }
+}
+
+@mixin linear-gradient($direction, $colors...)
+{
+  @include linear-gradient-data(background, null, null, $direction, $colors)
+}

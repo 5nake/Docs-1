@@ -1,0 +1,23 @@
+$contrasted-dark-default:   #000 !default;
+$contrasted-light-default:  #fff !default;
+$contrasted-lightness-threshold: 30% !default;
+
+
+@function contrast-color(
+  $color,
+  $dark: #000,
+  $light: #fff,
+  $threshold: 30%
+) {
+  @return if(lightness($color) < $threshold, $light, $dark)
+}
+
+@mixin contrasted(
+  $background-color,
+  $dark: #000,
+  $light: #fff,
+  $threshold: 30%
+) {
+  background-color: $background-color;
+  color: contrast-color($background-color, $dark, $light, $threshold);
+}
