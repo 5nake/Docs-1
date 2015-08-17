@@ -58,6 +58,7 @@
           margin: 6px -10px 5px 5px;
         }
 
+        &.enabled,
         &:hover {
           color: #fff;
           background: lighten(#474d57, 5%);
@@ -80,12 +81,30 @@
         display: block;
         position: absolute;
         z-index: 9;
-        top: 42px;
+        top: -999999px;
         left: 8px;
         border-radius: 3px;
         padding: 10px 10px;
         min-width: 200px;
         color: #fff;
+        opacity: 0;
+        margin-top: 40px;
+        @include transition(
+          opacity .3s $swift,
+          margin .3s $swift,
+          top 0 $swift
+        );
+
+        &.visible {
+          opacity: 1;
+          top: 42px;
+          margin-top: 0;
+          @include transition(
+            opacity .3s $swift,
+            margin .3s $swift,
+            top 0 $swift .3s
+          );
+        }
 
         h3 {
           display: block;
@@ -122,24 +141,6 @@
             line-height: 32px;
             position: relative;
             margin: 0 0 5px 0;
-
-            .tooltip {
-              margin-top: 16px;
-              margin-left: 0;
-              display: block;
-              float: left;
-              clear: both;
-              left: 170px;
-              background: rgba(#fff, .9);
-              color: #474d57;
-              bottom: 40px;
-              &:before {
-                border-bottom-color: #fff;
-              }
-              .tooltip-small {
-                color: lighten(#474d57, 10%);
-              }
-            }
 
             &:after {
               cursor: pointer;
@@ -228,9 +229,7 @@
             }
 
             &:hover {
-              @include tooltip-hover;
               @include transition(.2s $swift);
-              bottom: 0;
               background: #595e67;
               .upload-file-title:before {
                 @include transition(.2s $swift);

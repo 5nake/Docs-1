@@ -2334,6 +2334,38 @@
 
 /** 
  * @line app/models/*
+ * @file C:\Development\projects\Docs\resources\assets\javascripts\app\models\Toggle.coffee
+ */
+(function() {
+  var Toggle,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  namespace({
+    App: {
+      Models: Toggle = (function() {
+
+        Toggle.name = 'Toggle';
+
+        function Toggle() {
+          this.click = __bind(this.click, this);
+          this.visible = ko.observable(false);
+        }
+
+        Toggle.prototype.click = function() {
+          this.visible(!this.visible());
+          return false;
+        };
+
+        return Toggle;
+
+      })()
+    }
+  });
+
+}).call(this);
+
+/** 
+ * @line app/models/*
  * @file C:\Development\projects\Docs\resources\assets\javascripts\app\models\Upload.coffee
  */
 (function() {
@@ -2556,7 +2588,7 @@
  * @file C:\Development\projects\Docs\resources\assets\javascripts\app\controllers\DocsController.coffee
  */
 (function() {
-  var AbstractController, DocsController, Document, Dropzone, Nav, Upload, User,
+  var AbstractController, DocsController, Document, Dropzone, Nav, Toggle, Upload, User,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
@@ -2566,6 +2598,8 @@
   User = App.Models.User;
 
   Upload = App.Models.Upload;
+
+  Toggle = App.Models.Toggle;
 
   Document = App.Models.Document;
 
@@ -2588,9 +2622,14 @@
         function DocsController(dom) {
           this.createDropzone = __bind(this.createDropzone, this);
 
-          var filter, nav;
+          var filter, nav,
+            _this = this;
           DocsController.__super__.constructor.call(this, dom);
+          this.buttonUploads = new Toggle;
           this.uploader = new Upload;
+          this.uploader.files.subscribe(function() {
+            return _this.buttonUploads.visible(true);
+          });
           this.dropzoneState = ko.observable('');
           this.createDropzone('uploadSection');
           this.documents = Document.all;

@@ -1,6 +1,7 @@
 {Nav} = App.Models
 {User} = App.Models
 {Upload} = App.Models
+{Toggle} = App.Models
 {Document} = App.Models
 {Dropzone} = App.Models.Upload
 {AbstractController} = App.Controllers
@@ -13,7 +14,10 @@ namespace App:Controllers:
     constructor: (dom) ->
       super dom
 
+      @buttonUploads  = new Toggle
+
       @uploader       = new Upload
+      @uploader.files.subscribe => @buttonUploads.visible(true)
       @dropzoneState  = ko.observable ''
       @createDropzone 'uploadSection'
 

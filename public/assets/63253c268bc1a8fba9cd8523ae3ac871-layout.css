@@ -6214,7 +6214,7 @@ input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
     padding: 0 4px;
     float: right;
     margin: 6px -10px 5px 5px; }
-  .page-docs header .main-nav a:hover {
+  .page-docs header .main-nav a.enabled, .page-docs header .main-nav a:hover {
     color: #fff;
     background: #525965;
     -webkit-transition: 0.2s, cubic-bezier(0.55, 0, 0.1, 1);
@@ -6237,12 +6237,28 @@ input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
     display: block;
     position: absolute;
     z-index: 9;
-    top: 42px;
+    top: -999999px;
     left: 8px;
     border-radius: 3px;
     padding: 10px 10px;
     min-width: 200px;
-    color: #fff; }
+    color: #fff;
+    opacity: 0;
+    margin-top: 40px;
+    -webkit-transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), margin 0.3s cubic-bezier(0.55, 0, 0.1, 1), top 0 cubic-bezier(0.55, 0, 0.1, 1);
+    -moz-transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), margin 0.3s cubic-bezier(0.55, 0, 0.1, 1), top 0 cubic-bezier(0.55, 0, 0.1, 1);
+    -ms-transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), margin 0.3s cubic-bezier(0.55, 0, 0.1, 1), top 0 cubic-bezier(0.55, 0, 0.1, 1);
+    -o-transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), margin 0.3s cubic-bezier(0.55, 0, 0.1, 1), top 0 cubic-bezier(0.55, 0, 0.1, 1);
+    transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), margin 0.3s cubic-bezier(0.55, 0, 0.1, 1), top 0 cubic-bezier(0.55, 0, 0.1, 1); }
+  .page-docs header .main-nav .nav-dropdown.visible {
+    opacity: 1;
+    top: 42px;
+    margin-top: 0;
+    -webkit-transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), margin 0.3s cubic-bezier(0.55, 0, 0.1, 1), top 0 cubic-bezier(0.55, 0, 0.1, 1) 0.3s;
+    -moz-transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), margin 0.3s cubic-bezier(0.55, 0, 0.1, 1), top 0 cubic-bezier(0.55, 0, 0.1, 1) 0.3s;
+    -ms-transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), margin 0.3s cubic-bezier(0.55, 0, 0.1, 1), top 0 cubic-bezier(0.55, 0, 0.1, 1) 0.3s;
+    -o-transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), margin 0.3s cubic-bezier(0.55, 0, 0.1, 1), top 0 cubic-bezier(0.55, 0, 0.1, 1) 0.3s;
+    transition: opacity 0.3s cubic-bezier(0.55, 0, 0.1, 1), margin 0.3s cubic-bezier(0.55, 0, 0.1, 1), top 0 cubic-bezier(0.55, 0, 0.1, 1) 0.3s; }
   .page-docs header .main-nav .nav-dropdown h3 {
     display: block;
     text-align: center;
@@ -6279,21 +6295,8 @@ input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
       line-height: 32px;
       position: relative;
       margin: 0 0 5px 0; }
-      .page-docs header .main-nav .nav-dropdown.upload-file-list .upload-file-item .tooltip {
-        margin-top: 16px;
-        margin-left: 0;
-        display: block;
-        float: left;
-        clear: both;
-        left: 170px;
-        background: rgba(255, 255, 255, .9);
-        color: #474d57;
-        bottom: 40px; }
-        .page-docs header .main-nav .nav-dropdown.upload-file-list .upload-file-item .tooltip:before {
-          border-bottom-color: #fff; }
-        .page-docs header .main-nav .nav-dropdown.upload-file-list .upload-file-item .tooltip .tooltip-small {
-          color: #5e6673; }
       .page-docs header .main-nav .nav-dropdown.upload-file-list .upload-file-item:after {
+        cursor: pointer;
         position: absolute;
         content: '×';
         text-align: center;
@@ -6373,16 +6376,7 @@ input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
         -ms-transition: 0.2s cubic-bezier(0.55, 0, 0.1, 1);
         -o-transition: 0.2s cubic-bezier(0.55, 0, 0.1, 1);
         transition: 0.2s cubic-bezier(0.55, 0, 0.1, 1);
-        bottom: 0;
         background: #595e67; }
-        .page-docs header .main-nav .nav-dropdown.upload-file-list .upload-file-item:hover .tooltip {
-          opacity: 1 !important;
-          bottom: 20px;
-          -webkit-transition: 0.3s cubic-bezier(0.55, 0, 0.1, 1) 0.4s;
-          -moz-transition: 0.3s cubic-bezier(0.55, 0, 0.1, 1) 0.4s;
-          -ms-transition: 0.3s cubic-bezier(0.55, 0, 0.1, 1) 0.4s;
-          -o-transition: 0.3s cubic-bezier(0.55, 0, 0.1, 1) 0.4s;
-          transition: 0.3s cubic-bezier(0.55, 0, 0.1, 1) 0.4s; }
         .page-docs header .main-nav .nav-dropdown.upload-file-list .upload-file-item:hover .upload-file-title:before {
           -webkit-transition: 0.2s cubic-bezier(0.55, 0, 0.1, 1);
           -moz-transition: 0.2s cubic-bezier(0.55, 0, 0.1, 1);

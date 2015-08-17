@@ -2,14 +2,18 @@
     <header class="grid-12">
         <div class="header-push grid-2"></div>
         <nav class="main-nav">
-            <a href="#">
+            <a href="#" nd-click="buttonUploads.click" nd-attr="
+                class: (buttonUploads.visible()?'enabled':'')
+            ">
                 Загрузки
                 <!--ko if: uploader.files().length > 0-->
                 <span class="nav-available" nd-text="uploader.files().length">0</span>
                 <!--/ko-->
             </a>
 
-            <section class="nav-dropdown upload-file-list">
+            <section class="nav-dropdown upload-file-list" nd-attr="
+                class: 'nav-dropdown upload-file-list ' + (buttonUploads.visible()?'visible':'')
+            ">
                 <section class="upload-file-list-container">
                     <!--ko foreach: uploader.files-->
                     <article class="upload-file-item" nd-click="$parent.uploader.remove">
@@ -27,15 +31,6 @@
                                 Ожидание&hellip;
                             </span>
                             <div class="upload-file-progress"></div>
-                        </div>
-                        <div class="tooltip">
-                            <img src="/img/formats/default.png" alt="" nd-attr="
-                                src: image,
-                                alt: name
-                            " />
-                            <span nd-text="name">&nbsp;</span>
-                            <br />
-                            <span class="tooltip-small" nd-text="size">&nbsp;</span>
                         </div>
                     </article>
                     <!--/ko-->
