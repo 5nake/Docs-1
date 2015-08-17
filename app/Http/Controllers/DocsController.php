@@ -12,4 +12,9 @@ class DocsController extends AbstractController
     {
         return \Auth::user()->documents()->latest()->get();
     }
+
+    public function upload()
+    {
+        return \Input::file();
+    }
 }

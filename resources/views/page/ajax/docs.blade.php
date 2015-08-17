@@ -2,54 +2,7 @@
     <header class="grid-12">
         <div class="header-push grid-2"></div>
         <nav class="main-nav">
-            <a href="#" nd-click="buttonUploads.click" nd-attr="
-                class: (buttonUploads.visible()?'enabled':'')
-            ">
-                Загрузки
-                <!--ko if: uploader.files().length > 0-->
-                <span class="nav-available" nd-text="uploader.files().length">0</span>
-                <!--/ko-->
-            </a>
-
-            <section class="nav-dropdown upload-file-list" nd-attr="
-                class: 'nav-dropdown upload-file-list ' + (buttonUploads.visible()?'visible':'')
-            ">
-                <section class="upload-file-list-container">
-                    <!--ko foreach: uploader.files-->
-                    <article class="upload-file-item" nd-click="$parent.uploader.remove">
-                        <div class="upload-file-preview">
-                            <img src="/img/formats/default.png" alt="" nd-attr="
-                                src: image,
-                                alt: name
-                            " />
-                        </div>
-                        <div class="upload-file-title" nd-text="name">
-                            undefined
-                        </div>
-                        <div class="upload-file-preloader">
-                            <span class="upload-file-state">
-                                Ожидание&hellip;
-                            </span>
-                            <div class="upload-file-progress"></div>
-                        </div>
-                    </article>
-                    <!--/ko-->
-                    <!--ko if: uploader.files().length == 0-->
-                        <h3>Нет файлов для загрузки</h3>
-                    <!--/ko-->
-                </section>
-
-                <section class="footer">
-                    <!--ko if: uploader.files().length > 0-->
-                        <a href="#" class="button">Загрузить</a>
-                        <a href="#" class="button reset">Очистить</a>
-                    <!--/ko-->
-                    <!--ko if: uploader.files().length == 0-->
-                        <a href="#" class="button disabled">Загрузить</a>
-                        <a href="#" class="button disabled reset">Очистить</a>
-                    <!--/ko-->
-                </section>
-            </section>
+            @include('header.uploads')
         </nav>
     </header>
 
@@ -59,12 +12,10 @@
                 <a href="#" class="logo"></a>
             </article>
 
-            <article class="upload-section"
-                     nd-attr="class: 'upload-section ' + dropzoneState()"
+            <article class="upload-section" nd-attr="class: 'upload-section ' + dropzoneState()"
                      data-id="uploadSection">
                 <div class="upload-section-borders"></div>
             </article>
-
 
             <nav>
                 <span class="title">Навигация</span>

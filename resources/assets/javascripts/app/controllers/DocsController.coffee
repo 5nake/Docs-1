@@ -33,7 +33,6 @@ namespace App:Controllers:
       filter  = new Nav.Filter()
       @filter = filter.buttons
 
-
     createDropzone: (dataId) =>
       for section in @section(dataId)
         dropzone = new Dropzone(section)

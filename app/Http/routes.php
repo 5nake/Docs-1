@@ -21,6 +21,8 @@ Route::post('/logout', ['uses' => AuthController::method('logout'), 'as' => 'aut
 
 Route::group(['prefix' => 'docs', 'middleware' => 'auth'], function () {
 
+    Route::get('all.json',      ['uses' => DocsController::method('getAllDocuments'), 'as' => 'docs.all']);
 
-    Route::get('all.json', ['uses' => DocsController::method('getAllDocuments'), 'as' => 'docs.all']);
+    Route::post('upload.json',  ['uses' => DocsController::method('upload'), 'as' => 'docs.upload']);
+
 });
