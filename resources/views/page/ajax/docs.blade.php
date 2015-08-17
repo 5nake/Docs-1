@@ -4,48 +4,55 @@
         <nav class="main-nav">
             <a href="#">
                 Загрузки
-                <span class="nav-available">3</span>
+                <!--ko if: uploader.files().length > 0-->
+                <span class="nav-available" nd-text="uploader.files().length">0</span>
+                <!--/ko-->
             </a>
 
             <section class="nav-dropdown upload-file-list">
-                <article class="upload-file-item">
-                    <div class="upload-file-preview">
-                        <img src="/img/formats/default.png" />
-                    </div>
-                    <div class="upload-file-title">123123.jpg</div>
-                    <div class="upload-file-preloader">
-                        <span class="upload-file-state">Ожидание&hellip;</span>
-                        <div class="upload-file-progress"></div>
-                    </div>
-                </article>
-
-                <article class="upload-file-item">
-                    <div class="upload-file-preview">
-                        <img src="/img/formats/default.png" />
-                    </div>
-                    <div class="upload-file-title">asda 123123sdfds.psd</div>
-                    <div class="upload-file-preloader">
-                        <span class="upload-file-state upload-file-run">Загрузка 10%</span>
-                        <div class="upload-file-progress">
-                            <div class="upload-file-progress" style="width: 10%"></div>
+                <section class="upload-file-list-container">
+                    <!--ko foreach: uploader.files-->
+                    <article class="upload-file-item" nd-click="$parent.uploader.remove">
+                        <div class="upload-file-preview">
+                            <img src="/img/formats/default.png" alt="" nd-attr="
+                                src: image,
+                                alt: name
+                            " />
                         </div>
-                    </div>
-                </article>
-
-                <article class="upload-file-item">
-                    <div class="upload-file-preview">
-                        <img src="/img/formats/default.png" />
-                    </div>
-                    <div class="upload-file-title">test.exe</div>
-                    <div class="upload-file-preloader">
-                        <span class="upload-file-state">Ожидание&hellip;</span>
-                        <div class="upload-file-progress"></div>
-                    </div>
-                </article>
+                        <div class="upload-file-title" nd-text="name">
+                            undefined
+                        </div>
+                        <div class="upload-file-preloader">
+                            <span class="upload-file-state">
+                                Ожидание&hellip;
+                            </span>
+                            <div class="upload-file-progress"></div>
+                        </div>
+                        <div class="tooltip">
+                            <img src="/img/formats/default.png" alt="" nd-attr="
+                                src: image,
+                                alt: name
+                            " />
+                            <span nd-text="name">&nbsp;</span>
+                            <br />
+                            <span class="tooltip-small" nd-text="size">&nbsp;</span>
+                        </div>
+                    </article>
+                    <!--/ko-->
+                    <!--ko if: uploader.files().length == 0-->
+                        <h3>Нет файлов для загрузки</h3>
+                    <!--/ko-->
+                </section>
 
                 <section class="footer">
-                    <a href="#" class="button button-white">Загрузить</a>
-                    <a href="#" class="button button-white reset">Очистить</a>
+                    <!--ko if: uploader.files().length > 0-->
+                        <a href="#" class="button">Загрузить</a>
+                        <a href="#" class="button reset">Очистить</a>
+                    <!--/ko-->
+                    <!--ko if: uploader.files().length == 0-->
+                        <a href="#" class="button disabled">Загрузить</a>
+                        <a href="#" class="button disabled reset">Очистить</a>
+                    <!--/ko-->
                 </section>
             </section>
         </nav>
@@ -90,22 +97,28 @@
         </aside>
 
 
-        <section class="push-2 grid-10 docs-container">
-            <section class="" nd-foreach="documents">
-                <article class="document">
-                    <figure class="document-preview" nd-attr="style: 'background-image:url(' + preview() + ');'"></figure>
+        <table class="content">
+            <tr>
+                <td class="content-push">
+                    &nbsp;
+                </td>
+                <td class="docs-container">
+                    <section class="" nd-foreach="documents">
+                        <article class="document">
+                            <figure class="document-preview" nd-attr="style: 'background-image:url(' + preview() + ');'"></figure>
 
-                    <span class="document-title" nd-text="title"></span>
-                    <time class="document-time" nd-text="created_at"></time>
+                            <span class="document-title" nd-text="title"></span>
+                            <time class="document-time" nd-text="created_at"></time>
 
-                    <span class="document-tooltip">
-                        <span nd-text="title">&nbsp;</span>
-                        <br />
-                        <span class="document-tooltip-small" nd-text="size">&nbsp;</span>
-                    </span>
-                </article>
-
-            </section>
-        </section>
+                            <span class="tooltip">
+                                <span nd-text="title">&nbsp;</span>
+                                <br />
+                                <span class="tooltip-small" nd-text="size">&nbsp;</span>
+                            </span>
+                        </article>
+                    </section>
+                </td>
+            </tr>
+        </table>
     </main>
 </section>

@@ -1662,6 +1662,12 @@
             this.dom = dom;
             this.upload = __bind(this.upload, this);
 
+            this.onDrop = __bind(this.onDrop, this);
+
+            this.onLeave = __bind(this.onLeave, this);
+
+            this.onEnter = __bind(this.onEnter, this);
+
             this.drop = __bind(this.drop, this);
 
             this.leave = __bind(this.leave, this);
@@ -1670,6 +1676,11 @@
 
             this.make = __bind(this.make, this);
 
+            this.on = {
+              drop: ko.observableArray([]),
+              enter: ko.observableArray([]),
+              leave: ko.observableArray([])
+            };
             this.focused = ko.observable(false);
             this.state = ko.observable('');
             if (window.FileReader != null) {
@@ -1680,7 +1691,19 @@
           }
 
           Dropzone.prototype.make = function() {
-            var _this = this;
+            var uploader,
+              _this = this;
+            uploader = document.createElement('input');
+            uploader.type = 'file';
+            uploader.name = 'images[]';
+            uploader.multiple = 'multiple';
+            uploader.min = 0;
+            this.dom.addEventListener('click', function() {
+              return uploader.click();
+            });
+            uploader.addEventListener('change', function(event) {
+              return _this.drop(event.target.files);
+            });
             this.dom.ondragover = function(event) {
               return _this.drag(event);
             };
@@ -1688,47 +1711,165 @@
               return _this.leave(event);
             };
             this.dom.ondrop = function(event) {
-              return _this.drop(event);
+              event.stopPropagation();
+              event.preventDefault();
+              return _this.drop(event.dataTransfer.files);
             };
             return this;
           };
 
           Dropzone.prototype.drag = function(event) {
+            var i, _i, _len, _ref;
+            this.focused(true);
             event.dataTransfer.dropEffect = 'copy';
             event.stopPropagation();
             event.preventDefault();
-            this.focused(true);
+            if (!this.focused()) {
+              _ref = this.on.enter();
+              for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+                i = _ref[_i];
+                i(event);
+              }
+            }
             return false;
           };
 
           Dropzone.prototype.leave = function(event) {
+            var i, _i, _len, _ref;
             this.focused(false);
             event.stopPropagation();
             event.preventDefault();
+            _ref = this.on.leave();
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              i = _ref[_i];
+              i(event);
+            }
             return false;
           };
 
-          Dropzone.prototype.drop = function(event) {
-            var file, _i, _len, _ref;
+          Dropzone.prototype.drop = function(files) {
+            var file, _i, _len;
             this.focused(false);
-            event.stopPropagation();
-            event.preventDefault();
-            _ref = event.dataTransfer.files;
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              file = _ref[_i];
+            for (_i = 0, _len = files.length; _i < _len; _i++) {
+              file = files[_i];
               this.upload(file);
             }
             return false;
           };
 
+          Dropzone.prototype.onEnter = function(callback) {
+            this.on.enter.push(callback);
+            return this;
+          };
+
+          Dropzone.prototype.onLeave = function(callback) {
+            this.on.leave.push(callback);
+            return this;
+          };
+
+          Dropzone.prototype.onDrop = function(callback) {
+            this.on.drop.push(callback);
+            return this;
+          };
+
           Dropzone.prototype.upload = function(file) {
+            var i, _i, _len, _ref, _results;
             if (file.size > FILE_SIZE_UPLOAD) {
               throw new Error("File to large (" + file.size + "/" + FILE_SIZE_UPLOAD + ")");
             }
-            return echo(file);
+            _ref = this.on.drop();
+            _results = [];
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              i = _ref[_i];
+              _results.push(i(event, file));
+            }
+            return _results;
           };
 
           return Dropzone;
+
+        })()
+      }
+    }
+  });
+
+}).call(this);
+
+/** 
+ * @line app/models/Upload/*
+ * @file C:\Development\projects\Docs\resources\assets\javascripts\app\models\Upload\File.coffee
+ */
+(function() {
+  var File,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  namespace({
+    App: {
+      Models: {
+        Upload: File = (function() {
+          var id;
+
+          File.name = 'File';
+
+          id = 0;
+
+          define({
+            FILE_DEFAULT_IMAGE: '/img/formats/default.png'
+          });
+
+          function File(file) {
+            this.parseImage = __bind(this.parseImage, this);
+
+            this.readImage = __bind(this.readImage, this);
+
+            var parts,
+              _this = this;
+            this.id = id++;
+            this.name = ko.observable(file.name);
+            this.size = ko.observable(file.size);
+            this.image = ko.observable(FILE_DEFAULT_IMAGE);
+            this.mime = ko.observable(file.type);
+            this.ext = ko.observable((parts = this.name().split('.'))[parts.length - 1]);
+            if (this.mime() === 'image/png' || this.mime() === 'image/jpg' || this.mime() === 'image/jpeg' || this.mime() === 'image/gif' || this.mime() === 'image/svg+xml' || this.mime() === 'image/x-icon') {
+              this.readImage(file, function(base64) {
+                return _this.image(base64);
+              });
+            }
+          }
+
+          File.prototype.readImage = function(file, cb) {
+            var reader,
+              _this = this;
+            if (cb == null) {
+              cb = (function() {});
+            }
+            reader = new FileReader;
+            reader.onload = function(d) {
+              return _this.parseImage(d.target.result, cb);
+            };
+            return reader.readAsDataURL(file);
+          };
+
+          File.prototype.parseImage = function(base64, callback) {
+            var cnv, ctx, height, image, left, top, width,
+              _this = this;
+            cnv = document.createElement('canvas');
+            cnv.width = 160;
+            cnv.height = 120;
+            ctx = cnv.getContext('2d');
+            image = new Image;
+            image.src = base64;
+            width = 160;
+            height = image.height / (image.width / 160);
+            left = (160 - width) / 2;
+            top = (120 - height) / 2;
+            return image.onload = function() {
+              ctx.drawImage(image, left, top, width, height);
+              return callback(cnv.toDataURL());
+            };
+          };
+
+          return File;
 
         })()
       }
@@ -2196,8 +2337,10 @@
  * @file C:\Development\projects\Docs\resources\assets\javascripts\app\models\Upload.coffee
  */
 (function() {
-  var Upload,
+  var File, Upload,
     __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
+  File = App.Models.Upload.File;
 
   namespace({
     App: {
@@ -2214,11 +2357,23 @@
         });
 
         function Upload() {
-          this.applyToDom = __bind(this.applyToDom, this);
+          this.remove = __bind(this.remove, this);
 
+          this.add = __bind(this.add, this);
+          this.files = ko.observableArray([]);
         }
 
-        Upload.prototype.applyToDom = function(dom) {};
+        Upload.prototype.add = function(file) {
+          this.files.push(new File(file));
+          return this;
+        };
+
+        Upload.prototype.remove = function(file) {
+          this.files.remove(function(item) {
+            return file.id === item.id;
+          });
+          return this;
+        };
 
         return Upload;
 
@@ -2231,6 +2386,11 @@
 /** 
  * @line app/models/*
  * @file C:\Development\projects\Docs\resources\assets\javascripts\app\models\Upload\Dropzone.coffee
+ */
+
+/** 
+ * @line app/models/*
+ * @file C:\Development\projects\Docs\resources\assets\javascripts\app\models\Upload\File.coffee
  */
 
 /** 
@@ -2397,6 +2557,7 @@
  */
 (function() {
   var AbstractController, DocsController, Document, Dropzone, Nav, Upload, User,
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
@@ -2425,19 +2586,13 @@
         DocsController.prototype.view = 'docs';
 
         function DocsController(dom) {
-          var dropzone, filter, nav, section, _i, _len, _ref,
-            _this = this;
+          this.createDropzone = __bind(this.createDropzone, this);
+
+          var filter, nav;
           DocsController.__super__.constructor.call(this, dom);
           this.uploader = new Upload;
           this.dropzoneState = ko.observable('');
-          _ref = this.section('uploadSection');
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            section = _ref[_i];
-            dropzone = new Dropzone(section);
-            dropzone.focused.subscribe(function(state) {
-              return _this.dropzoneState(state ? 'upload-hover' : '');
-            });
-          }
+          this.createDropzone('uploadSection');
           this.documents = Document.all;
           Document.prototype.load();
           nav = new Nav.Main();
@@ -2446,6 +2601,24 @@
           filter = new Nav.Filter();
           this.filter = filter.buttons;
         }
+
+        DocsController.prototype.createDropzone = function(dataId) {
+          var dropzone, section, _i, _len, _ref, _results,
+            _this = this;
+          _ref = this.section(dataId);
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            section = _ref[_i];
+            dropzone = new Dropzone(section);
+            dropzone.focused.subscribe(function(state) {
+              return _this.dropzoneState(state ? 'upload-hover' : '');
+            });
+            _results.push(dropzone.onDrop(function(event, file) {
+              return _this.uploader.add(file);
+            }));
+          }
+          return _results;
+        };
 
         return DocsController;
 

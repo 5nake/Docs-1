@@ -13,13 +13,9 @@ namespace App:Controllers:
     constructor: (dom) ->
       super dom
 
-      @uploader = new Upload
-
-      @dropzoneState = ko.observable ''
-      for section in @section('uploadSection')
-        dropzone = new Dropzone(section)
-        dropzone.focused.subscribe (state) =>
-          @dropzoneState if state then 'upload-hover' else ''
+      @uploader       = new Upload
+      @dropzoneState  = ko.observable ''
+      @createDropzone 'uploadSection'
 
 
       @documents = Document.all
@@ -32,6 +28,17 @@ namespace App:Controllers:
 
       filter  = new Nav.Filter()
       @filter = filter.buttons
+
+
+    createDropzone: (dataId) =>
+      for section in @section(dataId)
+        dropzone = new Dropzone(section)
+
+        dropzone.focused.subscribe (state) =>
+          @dropzoneState if state then 'upload-hover' else ''
+
+        dropzone.onDrop (event, file) =>
+          @uploader.add file
 
 
 
