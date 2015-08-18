@@ -79,7 +79,7 @@ class Response extends HttpResponse
             'message' => $e->getMessage(),
         ];
 
-        if (config('add.debug')) {
+        if (config('app.debug')) {
             $response['file']  = $e->getFile();
             $response['line']  = $e->getLine();
             $response['class'] = get_class($e);
@@ -93,7 +93,11 @@ class Response extends HttpResponse
             $headers = $e->getHeaders();
         }
 
-        return static::createFromArray($response, $code, $headers);
+        return static::createFromArray(
+            $response,
+            $code,
+            $headers
+        );
     }
 
 
@@ -115,3 +119,4 @@ class Response extends HttpResponse
         return static::$actions;
     }
 }
+Response::boot();

@@ -51,7 +51,6 @@ namespace App:Request:
       if typeof args is 'function'
         [cb, args] = [args, {}]
 
-
       xhr = new XMLHttpRequest()
 
       #xhr.upload.onprogress = (event) =>
@@ -68,6 +67,7 @@ namespace App:Request:
 
       xhr.open @[options].method, @[options].url + url, @[options].async
       xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+      xhr.setRequestHeader 'X-CSRF-TOKEN', config.csrf
 
       if @[options].multipart
         xhr.send args

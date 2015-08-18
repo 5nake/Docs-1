@@ -10,7 +10,6 @@
   height: $size-height-ui;
   line-height: $size-height-ui;
   outline: none;
-  box-shadow: 0 0 0 1px rgba(#000, 0);
   position: relative;
   min-width: 0 !important;
   text-decoration: none !important;
@@ -33,7 +32,6 @@
   &:hover {
     background-color: lighten($color, 5%) !important;
     text-decoration: none;
-    box-shadow: 0 0 0 1px rgba(#000, .4);
     outline: none !important;
   }
 
@@ -41,7 +39,6 @@
   &:active {
     outline: none !important;
     background-color: darken($color, 15%) !important;
-    box-shadow: 0 0 0 1px rgba(#000, .2);
   }
 }
 
