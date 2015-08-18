@@ -12,6 +12,8 @@ namespace App:Models:Upload:
         xhr:      ko.observable null
         uploaded: ko.observable 0
         readed:   ko.observable 0
+
+        success:  ko.observable false
         error:    ko.observable false
       }
       @name  = ko.observable file.name
@@ -53,6 +55,9 @@ namespace App:Models:Upload:
       xhr.upload.addEventListener 'progress', (event) =>
         percentage = @percentage(event.loaded || event.position, event.total)
         @status.uploaded percentage
+
+      xhr.addEventListener 'load', (event) =>
+        @status.success true
 
       # not tested
       xhr.upload.addEventListener 'error', (event) => @state.error xhr.error.message

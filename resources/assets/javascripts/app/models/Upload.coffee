@@ -18,7 +18,10 @@ namespace App:Models:
       for file in @files()
         do (file) =>
           file.fileReader (event) =>
-            echo 'START UPLOAD'
+            file.status.success.subscribe =>
+              setTimeout =>
+                @remove file
+              , 1000
             file.upload('docs.upload')
 
 

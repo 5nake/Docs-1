@@ -18,6 +18,11 @@
                 </div>
             <!--/ko-->
 
+            <!--ko if: status.success-->
+                <div class="upload-file-success">
+                </div>
+            <!--/ko-->
+
             <div class="upload-file-preview">
                 <img src="/img/formats/default.png" alt="" nd-attr="src: image, alt: name" />
             </div>
@@ -44,7 +49,7 @@
         <!--/ko-->
 
         <!--ko if: uploader.files().length == 0-->
-        <h3>Нет файлов для загрузки</h3>
+        <h3>Список загрузок пуст</h3>
         <!--/ko-->
     </section>
 
