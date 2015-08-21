@@ -1,9 +1,34 @@
 <?php
 namespace App;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
+/**
+ * Class Document
+ * @package App
+ *
+ * Active Record properties:
+ *
+ * @property-read int $id
+ * @property int $user_id
+ * @property string $title
+ * @property int $permissions
+ * @property string $path
+ * @property string $token
+ * @property string $mime
+ * @property int $size
+ * @property string $preview
+ * @property-read Carbon $created_at
+ * @property-read Carbon $updated_at
+ *
+ * Relations:
+ *
+ * @property-read User $user
+ */
 class Document extends Model
 {
     protected $table = 'files';
@@ -18,7 +43,7 @@ class Document extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function user()
     {

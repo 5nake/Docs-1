@@ -1,20 +1,36 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Document\Uploader;
+use Illuminate\Http\Request;
+
+/**
+ * Class DocsController
+ * @package App\Http\Controllers
+ */
 class DocsController extends AbstractController
 {
-    public function __construct()
-    {
-
-    }
-
+    /**
+     * @return mixed
+     */
     public function getAllDocuments()
     {
-        return \Auth::user()->documents()->latest()->get();
+        return \Auth::user()
+            ->documents()
+            ->latest()
+            ->get();
     }
 
-    public function upload()
+    /**
+     * @param Request $request
+     */
+    public function upload(User $user, Request $request)
     {
-        return \Input::file();
+        $files = $request->files;
+        dd($files);
+        foreach ($files as $file) {
+            $uploder = new Uploader($user, $file);
+        }
     }
 }

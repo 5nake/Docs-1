@@ -74,6 +74,4 @@ namespace App:Models:Upload:
       @
 
     upload: (file) =>
-      if file.size > FILE_SIZE_UPLOAD
-        throw new Error "File to large (#{file.size}/#{FILE_SIZE_UPLOAD})"
       i(event, file) for i in @on.drop()

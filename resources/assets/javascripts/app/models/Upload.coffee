@@ -2,8 +2,8 @@
 
 namespace App:Models:
   class Upload
-    define FILE_SIZE_UPLOAD: 1000000000
-    define FILE_SIZE_FILES: 10
+    define FILE_SIZE_UPLOAD: config.upload.size
+    define FILE_SIZE_FILES: config.upload.files
 
     constructor: ->
       @files = ko.observableArray []

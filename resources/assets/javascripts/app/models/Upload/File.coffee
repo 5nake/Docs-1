@@ -12,7 +12,6 @@ namespace App:Models:Upload:
         xhr:      ko.observable null
         uploaded: ko.observable 0
         readed:   ko.observable 0
-
         success:  ko.observable false
         error:    ko.observable false
       }
@@ -32,10 +31,21 @@ namespace App:Models:Upload:
       )
         @readImage file, (base64) => @image(base64)
 
+      if file.size > FILE_SIZE_UPLOAD
+        fileSize  = parseFloat(file.size / 1000).toFixed()
+        available = parseFloat(FILE_SIZE_UPLOAD / 1000).toFixed()
+        @status.error "File to large (#{fileSize}Kb/#{available}Kb)"
+
+
+
     isFile: () =>
       @size() > 0
 
+
+
     fileReader: (callback) =>
+      return if @status.error()
+
       reader = new FileReader
 
       reader.onerror = (event) =>
@@ -49,7 +59,11 @@ namespace App:Models:Upload:
 
       reader.readAsBinaryString @file
 
+
+
     upload: (action, options) =>
+      return if @status.error()
+
       @status.xhr(xhr = new XMLHttpRequest())
 
       xhr.upload.addEventListener 'progress', (event) =>
@@ -68,11 +82,19 @@ namespace App:Models:Upload:
       xhr.overrideMimeType(@mime() || 'application/octet-stream')
       xhr.setRequestHeader 'X-File-Name', encodeURI(@name())
       xhr.setRequestHeader 'X-File-Type', encodeURI(@mime())
-      xhr.send @file
+
+      data = new FormData
+      data.append 'file', @file
+
+      xhr.send data
+
 
 
     percentage: (current, total) =>
       return Math.ceil(current / total * 100)
+
+
+
 
     # Read image
     readImage: (file, cb = (->)) =>
@@ -82,6 +104,8 @@ namespace App:Models:Upload:
       reader.onerror = (event) =>
         @state.error reader.error.message
       reader.readAsDataURL file
+
+
 
     # Image scale
     parseImage: (base64, callback) =>

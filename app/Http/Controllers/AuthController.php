@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-
 use App\Api\RuDev;
 use App\User;
 use Auth;
@@ -11,8 +10,16 @@ use LogicException;
 use RuDev\Api;
 use RuDev\Method;
 
+/**
+ * Class AuthController
+ * @package App\Http\Controllers
+ */
 class AuthController extends AbstractController
 {
+    /**
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
     public function verifyCode(Request $request)
     {
         $code = $request->get('code', '');
@@ -55,6 +62,7 @@ class AuthController extends AbstractController
             'user'   => $user,
         ]);
     }
+
 
     public function logout()
     {
