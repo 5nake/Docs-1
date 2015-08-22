@@ -9,9 +9,21 @@ namespace App:Models:
       @files = ko.observableArray []
 
     add: (file) =>
+      return if @files().length >= FILE_SIZE_FILES
+
       instance = new File(file)
       if instance.isFile()
         @files.push instance
+
+      onError = (instance) =>
+        setTimeout =>
+          @remove(instance)
+        , 2000
+
+      # If error remove file
+      onError(instance) if instance.status.error()
+      instance.status.error.subscribe => onError(instance)
+
       @
 
     upload: =>

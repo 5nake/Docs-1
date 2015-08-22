@@ -1,9 +1,12 @@
 <?php
 namespace App\Document;
 
-use App\Document;
 use App\User;
+use Auth;
+use App\Document;
 use RuntimeException;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -18,6 +21,11 @@ class Uploader
      * @var UploadedFile
      */
     private $file;
+
+    /**
+     * @var File
+     */
+    private $savedFile;
 
     /**
      * @var string
@@ -35,34 +43,48 @@ class Uploader
     private $publicUrl;
 
     /**
-     * @param User $user
      * @param UploadedFile $file
      * @throws RuntimeException
      */
-    public function __construct(User $user, UploadedFile $file)
+    public function __construct(UploadedFile $file)
     {
         $this->file = $file;
 
-        $hash = md5($file->getClientOriginalName() . mt_rand(0, 9999) . time());
+        if (!$file->isValid()) {
+            throw new RuntimeException('Invalid file. The file was damaged.');
+        }
 
+        if (!$file->isFile()) {
+            throw new RuntimeException('Invalid file data.');
+        }
+
+
+        $hash = md5($file->getClientOriginalName() . mt_rand(0, 9999) . time());
 
         $this->publicDir  =
             substr($hash, 0, 2) . '/' .
             substr($hash, 2, 2);
         $this->publicName = substr($hash, 4);
-        $this->publicUrl  = $this->publicDir . '/' . $this->publicName;
-        $this->publicDir  = public_path($this->publicDir);
+        $this->publicUrl  = '/' . $this->publicDir . '/' . $this->publicName;
 
+        $this->publicDir  = public_path(DocumentManager::UPLOADS_PATH . '/' . $this->publicDir);
 
-        if (!is_dir($this->publicDir)) {
-            if (!mkdir($this->publicDir, 0777, true)) {
-                throw new RuntimeException('Can not create storage directory.');
-            }
-        }
+        $this->savedFile  = $this->file->move($this->publicDir, $this->publicName);
+    }
 
-        $file->move($this->publicDir, $this->publicName);
+    /**
+     * @param User $user
+     * @throws FileException
+     */
+    public function save(User $user)
+    {
+        $document           = new Document();
+        $document->user_id  = $user->id;
+        $document->title    = $this->file->getClientOriginalName();
+        $document->path     = $this->publicUrl;
+        $document->mime     = $this->savedFile->getMimeType();
+        $document->size     = $this->savedFile->getSize();
 
-        #$document = new Document();
-        
+        $document->save();
     }
 }

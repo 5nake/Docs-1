@@ -56,12 +56,12 @@
 
     <section class="footer">
         <!--ko if: uploader.files().length > 0-->
-        <a href="#" nd-click="uploader.upload" class="button">Загрузить</a>
-        <a href="#" nd-click="uploader.reset" class="button reset">Очистить</a>
+            <a href="#" nd-click="uploader.upload" class="button">Загрузить</a>
+            <a href="#" nd-click="uploader.reset" class="button reset">Очистить</a>
         <!--/ko-->
         <!--ko if: uploader.files().length == 0-->
-        <a href="#" class="button disabled">Загрузить</a>
-        <a href="#" class="button disabled reset">Очистить</a>
+            <a href="#" class="button disabled">Загрузить</a>
+            <a href="#" class="button disabled reset">Очистить</a>
         <!--/ko-->
     </section>
 </section>

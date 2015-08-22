@@ -1,9 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\User;
+use Auth;
 use App\Document\Uploader;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 /**
  * Class DocsController
@@ -24,13 +25,15 @@ class DocsController extends AbstractController
 
     /**
      * @param Request $request
+     * @throws FileException
      */
-    public function upload(User $user, Request $request)
+    public function upload(Request $request)
     {
         $files = $request->files;
-        dd($files);
+
         foreach ($files as $file) {
-            $uploder = new Uploader($user, $file);
+            $upload = new Uploader($file);
+            $upload->save(Auth::user());
         }
     }
 }

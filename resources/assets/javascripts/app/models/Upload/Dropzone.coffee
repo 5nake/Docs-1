@@ -16,16 +16,15 @@ namespace App:Models:Upload:
         throw new Error 'Can not create dropzone section. FileReader does not support'
 
     make:  =>
-      uploader           = document.createElement 'input'
-      uploader.type      = 'file'
-      uploader.name      = 'images[]'
-      uploader.multiple  = 'multiple'
-      uploader.min       = 0
-
       @dom.addEventListener 'click', =>
+        uploader           = document.createElement 'input'
+        uploader.type      = 'file'
+        uploader.name      = 'images[]'
+        uploader.multiple  = 'multiple'
+        uploader.min       = 0
+        uploader.addEventListener 'change', (event) =>
+          @drop(event.target.files)
         uploader.click()
-      uploader.addEventListener 'change', (event) =>
-        @drop(event.target.files)
 
 
       @dom.ondragover   = (event) => @drag(event)

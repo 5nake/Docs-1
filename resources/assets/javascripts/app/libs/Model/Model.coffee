@@ -23,9 +23,11 @@ namespace App:Model:
       xhr = new Ajax
       xhr = xhr.with({ method: $static::route.method, parse: false })
       xhr.request route.route($static::route.name), (response) =>
+        cb($static)
         for i in response
           $static.all.push(new $static(i))
         $static.ready(true)
-        cb($static)
 
-
+    reload: =>
+      $static = @constructor
+      @load => $static.all []

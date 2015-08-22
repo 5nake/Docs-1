@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Contracts\DocumentManagerContract;
+use App\Document\DocumentManager;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->app->singleton(DocumentManagerContract::class, function(){
+            return new DocumentManager();
+        });
     }
 
     /**

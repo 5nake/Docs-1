@@ -1,9 +1,9 @@
 <?php
 namespace App\Providers;
 
-use App\View\Composer\EnvironmentComposer;
 use View;
 use Illuminate\Support\ServiceProvider;
+use App\View\Composer\EnvironmentComposer;
 
 /**
  * Class ComposerServiceProvider

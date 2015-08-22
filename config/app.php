@@ -136,15 +136,16 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
+        App\Providers\ObservableServiceProvider::class,
 
         /**
          * Vendor providers
          */
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
         Serafim\Asset\AssetServiceProvider::class,
         Lord\Laroute\LarouteServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------

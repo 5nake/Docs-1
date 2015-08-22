@@ -14,16 +14,25 @@ namespace App:Controllers:
     constructor: (dom) ->
       super dom
 
+      @documents = Document.all
+      Document::load()
+
       @buttonUploads  = new Toggle
 
       @uploader       = new Upload
-      @uploader.files.subscribe => @buttonUploads.visible(true)
+      @uploader.files.subscribe =>
+        Document::reload()
+        @buttonUploads.visible(true)
+
+        unless @uploader.files().length
+          clearTimeout(@timeout) if @timeout?
+          @timeout = setTimeout =>
+            @buttonUploads.visible(false)
+          , 1000
+
       @dropzoneState  = ko.observable ''
       @createDropzone 'uploadSection'
 
-
-      @documents = Document.all
-      Document::load()
 
 
       nav     = new Nav.Main()
