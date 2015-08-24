@@ -1,0 +1,18 @@
+.selected-files-list {
+
+
+  .footer {
+    .selected-file-delete {
+      &:before {
+        content: $fa-var-trash-o;
+      }
+    }
+
+    .selected-file-checkout {
+      &:before {
+        content: $fa-var-times-circle;
+      }
+    }
+
+  }
+}

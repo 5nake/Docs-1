@@ -24,24 +24,11 @@ namespace App:Controllers:
       @search.matchBy('title')
       @dict      = (dict) => @search.value(dict.value)
 
+
+
       # Document ready subscribe
       Document.ready.subscribe (state) =>
         @search.set(Document.all())
-
-      # On created
-      Document.created (document) =>
-          if document.checked()
-            echo document.title(), document.checked()
-            @selected.push(document)
-
-          document.checked.subscribe (checked) =>
-            if checked
-              @selected.push document
-            else
-              @selected.remove document
-
-      # Do loading
-      Document.load()
 
       # Header buttons
       @button = {
@@ -50,6 +37,20 @@ namespace App:Controllers:
       }
       @button.uploads.visible.subscribe (visible) => @button.selected.visible(false) if visible
       @button.selected.visible.subscribe (visible) => @button.uploads.visible(false) if visible
+
+      # On created
+      Document.created (document) =>
+        if document.checked()
+          @selected.remove (i) -> i.hash is document.hash
+          @selected.push document
+
+        document.checked.subscribe (checked) =>
+          if checked
+            @button.selected.visible true
+            @selected.push document
+          else
+            @selected.remove (i) -> i.hash is document.hash
+
 
       # Uploader
       @uploader       = new Upload
@@ -76,6 +77,14 @@ namespace App:Controllers:
       filter  = new Nav.Filter()
       @filter = filter.buttons
 
+      # Do loading
+      Document.load()
+
+
+    clearSelected: =>
+      Document.all().map (item) -> item.checked false
+
+      @button.selected.visible false
 
     createDropzone: (dataId) =>
       for section in @section(dataId)

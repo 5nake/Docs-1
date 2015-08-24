@@ -1,0 +1,114 @@
+.panel {
+  background: darken(#474d57, 5%);
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 250px;
+  width: 300px;
+  top: 0;
+  padding: 60px 10px 10px 10px;
+  height: 100%;
+  color: #fff;
+  box-shadow:
+    inset 0 42px 0 #f3f3f4,
+    inset 0 45px 0 #e74c3c;
+
+
+  .container {
+    min-height: 320px;
+    height: 90%;
+    overflow: auto;
+    @include scrollbar;
+  }
+
+  .item {
+    @include box-sizing(border-box);
+    padding: 0 10px;
+    border-radius: 2px;
+    height: 32px;
+    line-height: 32px;
+    position: relative;
+    margin: 0 0 5px 0;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #808690;
+
+    .item-success,
+    .item-error {
+      border-radius: 2px;
+      position: absolute;
+      z-index: 20;
+      background: rgba(#e74c3c, .8);
+      color: #fff;
+      text-align: center;
+      height: 32px;
+      width: 100%;
+      left: 0;
+      top: 0;
+      font-size: 10px;
+      font-weight: 300;
+    }
+
+    .item-success {
+      background: rgba(#b1e73c, .8);
+      text-align: center;
+      &:before {
+        @include fa-icon;
+        content: $fa-var-check-circle;
+        color: #fff;
+        font-size: 24px;
+        position: relative;
+        top: 4px;
+      }
+    }
+
+    .item-title {
+      .highlight {
+        background: #e74c3c;
+        color: #fff;
+        display: inline-block;
+        border-radius: 2px;
+      }
+    }
+
+    &:hover {
+      color: #fff;
+      background: lighten(#474d57, 10%);
+      @include transition(.2s $swift);
+    }
+  }
+
+  h2,
+  h3 {
+    display: block;
+    text-align: center;
+    font-weight: 300;
+    padding: 10px 0 25px 0;
+    font-size: 22px;
+    margin: 0;
+    color: #808690;
+  }
+
+  .footer {
+    left: 250px;
+    width: 300px !important;
+    background: darken(#474d57, 5%);
+    @include clear;
+
+    a {
+      width: 135px;
+      display: block;
+      float: left;
+    }
+
+    &:before {
+      @include linear-gradient(
+        to bottom,
+        rgba(darken(#474d57, 5%), 0),
+        rgba(darken(#474d57, 5%), 1)
+      );
+    }
+  }
+}

@@ -33,12 +33,12 @@
       height: 14px;
       background: #fff url(/img/icons/nav.png) 0 -(14px*10) no-repeat;
       box-shadow:
-        0 0 0 2px #fff,
+        0 0 0 5px #fff,
         0 0 0 1px rgba(#000, 1);
       @include transform(scale(.1));
       display: block;
-      left: 8px;
-      top: 62px;
+      left: 11px;
+      top: 59px;
       opacity: 0;
       border-radius: 50%;
       @include transition(
@@ -51,7 +51,7 @@
         @include transform(scale(1));
         opacity: 1;
         box-shadow:
-          0 0 0 2px #fff,
+          0 0 0 5px #fff,
           0 0 0 120px rgba(#000, .6);
       }
     }
@@ -75,7 +75,6 @@
       color: #fff;
       display: inline-block;
       border-radius: 2px;
-      padding: 0 4px;
     }
   }
 

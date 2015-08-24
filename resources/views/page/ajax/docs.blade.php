@@ -1,6 +1,6 @@
 <section nd-controller="DocsController" class="animated fadeIn page-docs container-12">
     <header class="grid-12">
-        <div class="header-push grid-2"></div>
+        <div class="header-push"></div>
         <nav class="main-nav">
             @include('partial.uploads')
             @include('partial.selected')
@@ -8,7 +8,7 @@
     </header>
 
     <main>
-        <aside class="grid-2 docs-nav">
+        <aside class="docs-nav">
             <article class="docs-header">
                 <a href="#" class="logo"></a>
             </article>
@@ -34,22 +34,28 @@
                 </span>
             </nav>
 
+
             <div class="footer-padding"></div>
-            <section class="footer grid-2">
+            <section class="footer">
                 <span class="disc-quote">469.42Mb / 1024.00Mb</span>
+
                 <div class="disc-quote-container">
                     <div class="disc-quote-line" style="width: 5%"></div>
                 </div>
             </section>
         </aside>
 
-
         <table class="content">
             <tr>
-                <td class="content-push">
+                <td class="content-push" nd-attr="class: 'content-push ' + (
+                    (button.uploads.visible() || button.selected.visible())?'content-push-show':''
+                )">
                     &nbsp;
+                    @include('partial.panels.uploads')
+                    @include('partial.panels.selected')
                 </td>
                 <td class="docs-container">
+
                     <section class="docs-search">
                         <input type="text" data-bind="value: search.value, valueUpdate: 'input'" placeholder="Поиск" />
 
@@ -64,6 +70,7 @@
                         </article>
                         <!--/ko-->
                     </section>
+
                     <section class="" nd-foreach="documents">
                         @include('partial.document')
                     </section>

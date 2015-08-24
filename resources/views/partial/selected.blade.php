@@ -7,17 +7,3 @@
         <span class="nav-available" nd-text="selected().length">0</span>
     </a>
 <!--/ko-->
-
-
-<section class="nav-dropdown selected-files-list"
-         nd-attr="class: 'nav-dropdown selected-files-list ' + (button.selected.visible() ? 'visible' : '')">
-
-    <section nd-foreach="selected">
-        <span nd-text="title"></span>
-    </section>
-
-    <section class="footer">
-        <a href="#" title="Удалить">D</a>
-        <a href="#" title="Снять отметки">D</a>
-    </section>
-</section>

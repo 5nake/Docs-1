@@ -1,73 +1,53 @@
 @mixin button($color: #e74c3c, $font: #fff) {
-  @include box-sizing(border-box);
-  @include font(content);
-  @include transition(
-          box-shadow .1s ease,
-          background .1s ease
-  );
-  @include user-select(none);
-  display: block;
-  height: $size-height-ui;
-  line-height: $size-height-ui;
-  outline: none;
-  position: relative;
-  min-width: 0 !important;
-  text-decoration: none !important;
-  cursor: pointer;
-  font-size: 12px;
-  padding: 0 20px;
-  vertical-align: middle;
+  background: $color;
+  height: 32px;
+  line-height: 32px;
+  display: inline-block;
+  padding: 0 16px;
+  text-decoration: none;
+  color: $font;
   border-radius: 2px;
-  background: $color no-repeat;
-  color: $font !important;
+  margin: 0 5px;
   text-align: center;
-  text-transform: uppercase;
-  border: none;
+  font-size: 10px;
+  width: 135px;
+  @include gpu;
 
-  &.fa:before {
-    top: 10px;
-    position: relative;
+  &:before {
+    @include fa-icon;
+    color: $font;
+    display: inline-block;
+    margin-right: 8px;
+    font-size: 12px;
+    font-weight: 300;
   }
 
+  &:focus,
+  &:active,
   &:hover {
-    background-color: lighten($color, 5%) !important;
     text-decoration: none;
-    outline: none !important;
-  }
-
-  &.active,
-  &:active {
-    outline: none !important;
-    background-color: darken($color, 15%) !important;
-  }
-}
-
-.button,
-button,
-input[type=button],
-input[type=submit],
-input[type=reset] {
-  @include button(#e74c3c);
-
-  &.disabled {
-    box-shadow: none;
-    background-color: #888888 !important;
-    cursor: default;
-    color: #f6f6f6 !important;
-  }
-
-  &.button-red {
-    @include button(#b54040);
-  }
-
-  &.button-white {
-    @include button(#fff, #676a6c);
-    box-shadow: inset 0 0 0 1px #e7eaec;
-
-    &:hover {
-      box-shadow: inset 0 0 0 1px darken(#e7eaec, 10%);
+    color: lighten($font, 10%);
+    background: lighten($color, 5%);
+    @include transition(.2s $swift);
+    &:before {
+      color: lighten($font, 10%);
+      @include transition(.2s $swift);
     }
   }
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
 }
 
+.button {
+  @include button(#3c4149, #808690);
 
+  &.button-orange {
+    @include button(#e74c3c, #fff);
+  }
+}
