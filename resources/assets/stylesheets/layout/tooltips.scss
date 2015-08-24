@@ -1,5 +1,5 @@
 .tooltip {
-  @include transition(.2s $swift .2s);
+  @include transition(.2s $swift .5s);
   @include gpu;
   position: relative;
   bottom: 0;
@@ -54,6 +54,6 @@
   .tooltip {
     opacity: 1 !important;
     bottom: 20px;
-    @include transition(.3s $swift .4s);
+    @include transition(.3s $swift .8s);
   }
 }

@@ -1,0 +1,9 @@
+.selected-files-button {
+  .selected-files-icon:after {
+    background: url(/img/icons/nav.png) 0 (-14px*12) no-repeat;
+  }
+}
+
+.selected-files-list {
+  left: 100px;
+}

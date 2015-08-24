@@ -1,0 +1,64 @@
+.docs-search {
+  padding: 0 0 10px 0;
+
+  .docs-search-translation {
+    @include clear;
+    padding: 10px 0;
+    width: 100%;
+    height: 44px;
+    line-height: 24px;
+    text-align: left;
+
+    .docs-i18n {
+      display: inline-block;
+      box-shadow: inset 0 0 0 1px rgba(#000, .1);
+      border-radius: 2px;
+      margin: 0 4px 0 0;
+      padding: 0 10px;
+      color: #474d57;
+      height: 24px;
+      line-height: 24px;
+      font-weight: 400;
+      cursor: pointer;
+
+      .docs-i18n-title {
+        font-weight: 300;
+        color: #999;
+        margin-right: 5px;
+      }
+
+      &:hover {
+        background: #fff;
+        box-shadow: inset 0 0 0 1px rgba(#000, 0);
+        @include transition(.3s $swift);
+      }
+    }
+  }
+
+  input {
+    background: #f3f3f4;
+    line-height: 42px;
+    height: 42px;
+    border-radius: 3px;
+    border: none;
+    color: #333;
+    font-size: 22px;
+    font-weight: 300;
+    margin: 0 auto;
+    @include transition(.4s $swift);
+
+    @include placeholder {
+      color: #a9a9a9;
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    &:hover {
+      background: lighten(#f3f3f4, 3%);
+    }
+
+    &:focus {
+      background: #fff;
+    }
+  }
+}

@@ -1,13 +1,16 @@
-<a href="#" nd-click="buttonUploads.click" nd-attr="class: (buttonUploads.visible() ? 'enabled' : '')">
+<a href="#" class="upload-files-button" nd-click="button.uploads.click"
+    nd-attr="class: 'upload-files-button ' + (button.uploads.visible() ? 'enabled' : '')">
+
+    <span class="nav-icon upload-files-icon"></span>
     Загрузки
     <!--ko if: uploader.files().length > 0-->
-    <span class="nav-available" nd-text="uploader.files().length">0</span>
+        <span class="nav-available" nd-text="uploader.files().length">0</span>
     <!--/ko-->
 </a>
 
 
 <section class="nav-dropdown upload-file-list" nd-attr="class: 'nav-dropdown upload-file-list ' +
-    (buttonUploads.visible() ? 'visible' : '')">
+    (button.uploads.visible() ? 'visible' : '')">
 
     <section class="upload-file-list-container">
         <!--ko foreach: uploader.files-->

@@ -3,31 +3,41 @@
 
 namespace App:Model:
   class Model
-    route:
-      name: 'null'
-      method: METHOD_GET
+    @route:      'docs.all'
+    @method:     METHOD_GET
+    @all:        ko.observableArray([])
+    @ready:      ko.observable false
+    # events
+    @onCreated:  []
+    @onCreating: []
 
-    @all   = ko.observableArray([])
-    @ready = ko.observable false
+    @created: (callback) ->
+      @onCreated.push callback
+      @
 
+    @creating: (callback) ->
+      @onCreating.push callback
+      @
+
+    @load: (cb = (->)) ->
+      @ready(false)
+
+      xhr = new Ajax
+      xhr = xhr.with({ method: @method, parse: false })
+      xhr.request route.route(@route), (response) =>
+        cb(@)
+        for i in response
+          event(i) for event in @onCreating
+          instance = new @(i)
+          @all.push(instance)
+          event(instance, i) for event in @onCreated
+        @ready(true)
+
+    @reload: ->
+      @load => @all []
+
+
+    # INSTANCE
     constructor: (args) ->
       for i of args
         @[i] = ko.observable args[i]
-
-
-    load: (cb = (->)) =>
-      $static = @constructor
-
-      $static.ready(false)
-
-      xhr = new Ajax
-      xhr = xhr.with({ method: $static::route.method, parse: false })
-      xhr.request route.route($static::route.name), (response) =>
-        cb($static)
-        for i in response
-          $static.all.push(new $static(i))
-        $static.ready(true)
-
-    reload: =>
-      $static = @constructor
-      @load => $static.all []

@@ -2,7 +2,8 @@
     <header class="grid-12">
         <div class="header-push grid-2"></div>
         <nav class="main-nav">
-            @include('header.uploads')
+            @include('partial.uploads')
+            @include('partial.selected')
         </nav>
     </header>
 
@@ -49,20 +50,27 @@
                     &nbsp;
                 </td>
                 <td class="docs-container">
-                    <section class="" nd-foreach="documents">
-                        <article class="document">
-                            <figure class="document-preview" nd-attr="style: 'background-image:url(' + preview() + ');'"></figure>
+                    <section class="docs-search">
+                        <input type="text" data-bind="value: search.value, valueUpdate: 'input'" placeholder="Поиск" />
 
-                            <span class="document-title" nd-text="title"></span>
-                            <time class="document-time" nd-text="created_at"></time>
-
-                            <span class="tooltip">
-                                <span nd-text="title">&nbsp;</span>
-                                <br />
-                                <span class="tooltip-small" nd-text="size">&nbsp;</span>
-                            </span>
+                        <!--ko if: (search.found().length == 0) && (search.items().length > 0)-->
+                        <article class="docs-search-translation">
+                            <!--ko foreach: search.translate-->
+                                <span class="docs-i18n" nd-click="$parent.dict">
+                                    <span class="docs-i18n-title" nd-text="name"></span>
+                                    <span class="docs-i18n-content" nd-text="value"></span>
+                                </span>
+                            <!--/ko-->
                         </article>
+                        <!--/ko-->
                     </section>
+                    <section class="" nd-foreach="documents">
+                        @include('partial.document')
+                    </section>
+
+                    <!--ko if: documents().length == 0-->
+                    <h2>Файлов не найдено</h2>
+                    <!--/ko-->
                 </td>
             </tr>
         </table>

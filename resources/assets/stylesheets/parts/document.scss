@@ -1,0 +1,90 @@
+.document {
+  $width: 120px;
+  $height: 135px;
+
+  display: inline-block;
+  padding: 5px;
+  width: $width;
+  height: $height;
+  border-radius: 3px;
+  margin: 10px 5px;
+  position: relative;
+  text-align: center;
+
+  &:hover {
+    background: #e4e9eb;
+    @include transition(.2s $swift);
+    @include tooltip-hover;
+  }
+
+  .document-preview {
+    width: 110px;
+    height: 84px;
+    background: #f3f3f4 center center no-repeat;
+    //background-size: 106px 80px;
+    display: block;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+
+    .checkbox {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: #fff url(/img/icons/nav.png) 0 -(14px*10) no-repeat;
+      box-shadow:
+        0 0 0 2px #fff,
+        0 0 0 1px rgba(#000, 1);
+      @include transform(scale(.1));
+      display: block;
+      left: 8px;
+      top: 62px;
+      opacity: 0;
+      border-radius: 50%;
+      @include transition(
+        opacity .3s $swift,
+        transform .3s $swift
+      );
+
+      &.checked {
+        @include transition(.3s $swift);
+        @include transform(scale(1));
+        opacity: 1;
+        box-shadow:
+          0 0 0 2px #fff,
+          0 0 0 120px rgba(#000, .6);
+      }
+    }
+  }
+
+
+  .document-title {
+    text-align: left;
+    display: block;
+    margin-top: 3px;
+    padding: 2px 0 0 0 ;
+    color: #232b2d;
+    font-weight: 400;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .highlight {
+      background: #e74c3c;
+      color: #fff;
+      display: inline-block;
+      border-radius: 2px;
+      padding: 0 4px;
+    }
+  }
+
+
+  .document-time {
+    text-align: left;
+    display: block;
+    font-size: 10px;
+    color: #809195;
+    padding: 0;
+  }
+}

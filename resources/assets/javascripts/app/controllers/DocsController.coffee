@@ -1,6 +1,7 @@
 {Nav} = App.Models
 {User} = App.Models
 {Upload} = App.Models
+{Search} = App.Models
 {Toggle} = App.Models
 {Document} = App.Models
 {Dropzone} = App.Models.Upload
@@ -14,33 +15,67 @@ namespace App:Controllers:
     constructor: (dom) ->
       super dom
 
-      @documents = Document.all
-      Document::load()
+      # Collections
+      @search    = new Search(Document.all)
+      @documents = @search.found
+      @selected  = ko.observableArray []
 
-      @buttonUploads  = new Toggle
+      # Filters
+      @search.matchBy('title')
+      @dict      = (dict) => @search.value(dict.value)
 
+      # Document ready subscribe
+      Document.ready.subscribe (state) =>
+        @search.set(Document.all())
+
+      # On created
+      Document.created (document) =>
+          if document.checked()
+            echo document.title(), document.checked()
+            @selected.push(document)
+
+          document.checked.subscribe (checked) =>
+            if checked
+              @selected.push document
+            else
+              @selected.remove document
+
+      # Do loading
+      Document.load()
+
+      # Header buttons
+      @button = {
+        uploads:  new Toggle
+        selected: new Toggle
+      }
+      @button.uploads.visible.subscribe (visible) => @button.selected.visible(false) if visible
+      @button.selected.visible.subscribe (visible) => @button.uploads.visible(false) if visible
+
+      # Uploader
       @uploader       = new Upload
       @uploader.files.subscribe =>
-        Document::reload()
-        @buttonUploads.visible(true)
+        Document.reload()
+        @button.uploads.visible(true)
 
         unless @uploader.files().length
           clearTimeout(@timeout) if @timeout?
           @timeout = setTimeout =>
-            @buttonUploads.visible(false)
+            @button.uploads.visible(false)
           , 1000
 
+      # Drop Zone
       @dropzoneState  = ko.observable ''
       @createDropzone 'uploadSection'
 
-
-
+      # Left Main Nav
       nav     = new Nav.Main()
       nav.buttons()[0].focus()
       @nav    = nav.buttons
 
+      # Left filters
       filter  = new Nav.Filter()
       @filter = filter.buttons
+
 
     createDropzone: (dataId) =>
       for section in @section(dataId)

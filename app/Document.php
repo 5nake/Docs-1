@@ -3,6 +3,7 @@ namespace App;
 
 use App;
 use Carbon\Carbon;
+use App\Document\DocumentManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use App\Contracts\DocumentManagerContract;
@@ -65,7 +66,7 @@ class Document extends Model
      */
     public function getPathAttribute($path)
     {
-        return \App\Document\DocumentManager::UPLOADS_PATH . $path;
+        return DocumentManager::UPLOADS_PATH . $path;
     }
 
     /**
@@ -76,6 +77,14 @@ class Document extends Model
     {
         return App::make(DocumentManagerContract::class)
             ->fromPreview($this);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getHasPreviewAttribute()
+    {
+        return strpos($this->preview, DocumentManager::UPLOADS_PATH) !== false;
     }
 
     /**

@@ -17,6 +17,8 @@
 // = require app/libs/Cache/*
 // = require app/libs/Request/*
 // = require app/libs/View/*
+// = require app/libs/I18n/Lang/Dictionary.coffee
+// = require app/libs/I18n/Lang/*
 // = require app/libs/*
 
 

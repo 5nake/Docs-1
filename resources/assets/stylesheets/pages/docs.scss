@@ -39,9 +39,36 @@
         text-decoration: none;
         color: #808690;
         font-size: 13px;
+        margin-right: 10px;
         border-radius: 2px;
         height: inherit;
         @include gpu;
+
+        .nav-icon {
+          display: block;
+          float: left;
+          width: 14px;
+          height: 14px;
+          position: relative;
+          margin: 6px 6px 0 -10px;
+          opacity: .2;
+
+          &:after {
+            content: '';
+            display: block;
+            width: 14px;
+            height: 14px;
+            position: relative;
+            z-index: 2;
+          }
+        }
+
+        &:hover {
+          .nav-icon{
+            @include transition(.2s $swift);
+            opacity: 1;
+          }
+        }
 
         .nav-available {
           color: #fff;
@@ -62,7 +89,7 @@
         &:hover {
           color: #fff;
           background: lighten(#474d57, 5%);
-          @include transition(.2s, $swift);
+          @include transition(.2s $swift);
         }
       }
 
@@ -120,174 +147,14 @@
           content: '';
           display: block;
           position: absolute;
-          left: 10px;
+          left: 20px;
           top: -10px;
         }
-
-        &.upload-file-list {
-          width: 410px;
-
-          .upload-file-list-container {
-            max-height: 320px;
-            overflow: auto;
-            @include scrollbar;
-          }
-
-          .upload-file-item {
-            @include box-sizing(border-box);
-            padding: 0 10px;
-            border-radius: 2px;
-            height: 32px;
-            line-height: 32px;
-            position: relative;
-            margin: 0 0 5px 0;
-
-            .upload-file-success,
-            .upload-file-error {
-              border-radius: 2px;
-              position: absolute;
-              z-index: 20;
-              background: rgba(#e74c3c, .8);
-              color: #fff;
-              text-align: center;
-              height: 32px;
-              width: 100%;
-              left: 0;
-              top: 0;
-              font-size: 10px;
-              font-weight: 300;
-            }
-
-            .upload-file-success {
-              background: rgba(#b1e73c, .8);
-              text-align: center;
-              &:before {
-                @include fa-icon;
-                content: $fa-var-check-circle;
-                color: #fff;
-                font-size: 24px;
-                position: relative;
-                top: 4px;
-              }
-            }
-
-            &:after {
-              cursor: pointer;
-              position: absolute;
-              content: '×';
-              text-shadow: 0 0 2px rgba(#000, .3);
-              text-align: center;
-              width: 100%;
-              height: 100%;
-              left: 0;
-              top: 0;
-              z-index: 21;
-              background: rgba(#595e67, .4);
-              font-size: 24px;
-              opacity: 0;
-              @include transition(.3s $swift);
-              border-radius: 2px;
-            }
-
-            .upload-file-preview {
-              height: 32px;
-              margin-right: 10px;
-              float: left;
-              line-height: 32px;
-
-              img {
-                margin: 8px 0 0 0;
-                border-radius: 2px;
-                display: block;
-                height: 16px;
-                width: 21px;
-              }
-            }
-
-            .upload-file-title {
-              font-weight: 300;
-              float: left;
-              width: 100px;
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              margin-right: 8px;
-              position: relative;
-
-              &:before {
-                opacity: 1;
-                content: '';
-                display: block;
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 20px;
-                height: 32px;
-                @include linear-gradient(to right, rgba(#474d57, 0), rgba(#474d57, 1) 80%);
-              }
-            }
-
-            .upload-file-preloader {
-              width: 220px;
-              height: inherit;
-              float: left;
-              line-height: 20px;
-
-              .upload-file-state {
-                color: #808690;
-                font-size: 10px;
-                display: block;
-                width: 220px;
-                height: 20px;
-                font-weight: 300;
-
-                &.upload-file-run {
-                  color: #fff;
-                }
-              }
-
-              .upload-file-progress {
-                background: rgba(#000, .4);
-                border-radius: 2px;
-                width: 220px;
-                height: 4px;
-                position: relative;
-
-                .upload-file-read-progress,
-                .upload-file-upload-progress {
-                  position: absolute;
-                  left: 0;
-                  top: 0;
-                  z-index: 2;
-                  background: #e74c3c;
-                  border-radius: 2px;
-                  width: 220px;
-                  height: 4px;
-                  @include transition(width .3s $swift);
-                }
-
-                .upload-file-read-progress {
-                  background: #ccc;
-                  @include transition(width .2s $swift);
-                  z-index: 1;
-                }
-              }
-            }
-
-            &:hover {
-              @include transition(.2s $swift);
-              background: #595e67;
-              .upload-file-title:before {
-                @include transition(.2s $swift);
-                opacity: 0;
-              }
-              &:after {
-                opacity: 1;
-              }
-            }
-          }
-        }
       }
+
+
+      @import "parts/header/uploads";
+      @import "parts/header/selected";
     }
   }
 
@@ -383,6 +250,7 @@
 
     nav {
       padding: 10px 20px;
+
       .title {
         display: block;
         padding: 8px 6px;
@@ -463,7 +331,6 @@
       width: 100%;
       height: 55px;
     }
-
     .footer {
       min-width: 200px !important;
       position: fixed;
@@ -520,54 +387,7 @@
     padding: 15px 30px;
     text-align: center;
 
-    .document {
-      $width: 120px;
-      $height: 135px;
-
-      display: inline-block;
-      padding: 5px;
-      width: $width;
-      height: $height;
-      border-radius: 3px;
-      margin: 10px 5px;
-      position: relative;
-      text-align: center;
-
-      &:hover {
-        background: #e4e9eb;
-        @include transition(.2s $swift);
-        @include tooltip-hover;
-      }
-
-      .document-preview {
-        width: 110px;
-        height: 84px;
-        background: #f3f3f4 center center no-repeat;
-        background-size: 106px 80px;
-        display: block;
-        border-radius: 3px;
-      }
-
-      .document-title {
-        text-align: left;
-        display: block;
-        margin-top: 3px;
-        padding: 2px 0 0 0 ;
-        color: #232b2d;
-        font-weight: 400;
-        font-size: 15px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .document-time {
-        text-align: left;
-        display: block;
-        font-size: 10px;
-        color: #809195;
-        padding: 0;
-      }
-    }
+    @import "parts/search";
+    @import "parts/document";
   }
 }

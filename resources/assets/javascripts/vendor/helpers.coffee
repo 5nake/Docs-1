@@ -37,6 +37,9 @@ Object.defineProperty Object::, 'use', {
         @::[i] = cls::[i] unless @:: hasOwnProperty(i)
 }
 
+# ESCAPE
+RegExp.escape = (content) ->
+  content.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 
 ###
   define

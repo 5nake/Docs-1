@@ -15,7 +15,7 @@ input[type=password] {
   font-size: 14px;
 
   &:focus {
-    border: 1px solid #5481a2;
-    @include transition(border-color .2s $swift);
+    border-color: #e74c3c;
+    @include transition(.2s $swift);
   }
 }

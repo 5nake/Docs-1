@@ -81,6 +81,7 @@ class Uploader
         $document           = new Document();
         $document->user_id  = $user->id;
         $document->title    = $this->file->getClientOriginalName();
+
         $document->path     = $this->publicUrl;
         $document->mime     = $this->savedFile->getMimeType();
         $document->size     = $this->savedFile->getSize();
