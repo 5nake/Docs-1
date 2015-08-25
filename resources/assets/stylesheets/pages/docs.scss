@@ -117,7 +117,7 @@
   .docs-nav {
     width: 250px !important;
     position: fixed;
-    z-index: 3;
+    z-index: 998;
     left: 0;
     top: 0;
     height: 100%;
@@ -143,11 +143,12 @@
     @include box-sizing(content-box);
     @include transition(width .3s $swift);
 
+    @import "parts/panel";
+
     &.content-push-show {
       width: 550px;
     }
 
-    @import "parts/panel";
     @import "parts/panels/selected";
     @import "parts/panels/uploads";
   }
@@ -155,6 +156,8 @@
   .docs-container {
     padding: 15px 30px;
     text-align: center;
+
+    @import "parts/windows";
 
     @import "parts/search";
     @import "parts/document";

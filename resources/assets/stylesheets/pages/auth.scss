@@ -15,18 +15,19 @@
   .button-rudev {
     position: relative;
     width: 200px !important;
-    margin: 0 auto;
+    margin: 0 auto !important;
+    display: block;
 
     span {
       display: block;
       position: absolute;
       left: 2px;
       top: 2px;
-      height: 24px;
-      width: 24px;
-      border-radius: 2px;
+      height: 28px;
+      width: 28px;
+      border-radius: 1px;
       background: url(/img/logo.svg) center center no-repeat;
-      background-size: 24px 24px;
+      background-size: 28px auto;
     }
   }
 }

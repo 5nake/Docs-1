@@ -1,0 +1,27 @@
+input[type=checkbox] {
+  @include appearance(none);
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #d4d5d7 url(/img/icons/nav.png) 0 14px no-repeat;
+  box-shadow:
+    0 0 0 1px #fff,
+    0 0 0 2px rgba(#000, .1);
+  outline: none;
+
+  &:focus {
+    box-shadow:
+      0 0 0 1px #fff,
+      0 0 2px 2px #e74c3c;
+  }
+
+  &:checked {
+    box-shadow:
+      0 0 0 1px #8fce35,
+      0 0 0 2px rgba(#000, .1);
+    @include transition(background-color .2s $swift);
+    background-color: #fff;
+    background-position: 0 (-14px*10);
+  }
+}

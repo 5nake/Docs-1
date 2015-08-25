@@ -20,7 +20,7 @@
                 <div class="item-success"></div>
             <!--/ko-->
 
-            <div class="upload-file-preview">
+            <div class="item-icon">
                 <img src="/img/formats/default.png" alt="" nd-attr="src: image, alt: name" />
             </div>
             <div class="item-title" nd-html="name"></div>
@@ -42,7 +42,7 @@
 
     <section class="footer">
         <!--ko if: uploader.files().length > 0-->
-        <a href="#" class="button upload-file-action" nd-click="uploader.upload">Загрузить</a>
+        <a href="#" class="button button-green upload-file-action" nd-click="uploader.upload">Загрузить</a>
         <a href="#" class="button button-orange upload-file-clear" nd-click="uploader.reset">Очистить</a>
         <!--/ko-->
     </section>

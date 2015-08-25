@@ -3,6 +3,7 @@
 
 namespace App:Model:
   class Model
+    @previous:   null
     @route:      'docs.all'
     @method:     METHOD_GET
     @all:        ko.observableArray([])
@@ -37,7 +38,14 @@ namespace App:Model:
       @load => @all []
 
 
+
     # INSTANCE
     constructor: (args) ->
+      if @constructor.previous?
+        @previous = @constructor.previous
+        @constructor.previous  = @
+      else
+        @constructor.previous = @
+
       for i of args
         @[i] = ko.observable args[i]

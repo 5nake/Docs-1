@@ -1,7 +1,56 @@
 .selected-files-list {
+  .item {
+    img {
+      @include transition(.2s $swift);
+    }
 
+    input[type=checkbox] {
+      @include gpu;
+      @include transition(.2s $swift);
+      opacity: .7;
+      position: absolute;
+      left: 14px;
+      top: 9px;
+      z-index: 5;
+      pointer-events: none;
+      box-shadow:
+        0 0 0 2px #8fce35,
+        0 0 0 1px rgba(#fff, 0);
+    }
+
+    &:hover {
+      img {
+        opacity: .6;
+      }
+
+      input[type=checkbox] {
+        opacity: 1;
+        box-shadow:
+          0 0 0 2px #8fce35,
+          0 0 0 9px rgba(#fff, .3);
+      }
+    }
+  }
 
   .footer {
+    a {
+      padding: 0;
+      width: 130px;
+      margin: 5px !important;
+    }
+
+    .selected-file-open {
+      &:before {
+        content: $fa-var-external-link;
+      }
+    }
+
+    .selected-file-tags {
+      &:before {
+        content: $fa-var-tag;
+      }
+    }
+
     .selected-file-delete {
       &:before {
         content: $fa-var-trash-o;

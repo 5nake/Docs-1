@@ -1,0 +1,49 @@
+.window {
+  $padding: 20px;
+
+  position: fixed;
+  left: 0;
+  top: -100%;
+  width: 100%;
+  height: 100%;
+  z-index: 997;
+  opacity: 0;
+  padding: (42px + $padding) $padding $padding ($padding + 250px);
+  background: rgba(#474d57, .8);
+  @include transition(opacity .3s $swift);
+
+  .window-padding {
+    overflow: auto;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    @include scrollbar;
+    &::-webkit-scrollbar-thumb {
+      background: rgba(#fff, .7);
+      box-shadow: inset 0 0 0 2px #696e76;
+      &:hover {
+        background: #e74c3c;
+      }
+    }
+  }
+
+  &.visible {
+    top: 0;
+    opacity: 1;
+    .window-padding {
+      display: block;
+    }
+  }
+
+
+  .window-content {
+    background: #fff;
+    border-radius: 3px;
+    padding: 10px;
+    width: 100%;
+    min-height: 400px;
+  }
+}

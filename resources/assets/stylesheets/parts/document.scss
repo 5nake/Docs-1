@@ -1,3 +1,8 @@
+.document-container {
+  @include user-select(none);
+  cursor: default;
+}
+
 .document {
   $width: 120px;
   $height: 135px;
@@ -10,6 +15,7 @@
   margin: 10px 5px;
   position: relative;
   text-align: center;
+
 
   &:hover {
     background: #e4e9eb;

@@ -81,10 +81,17 @@ namespace App:Controllers:
       Document.load()
 
 
+    tagsSelected: =>
+      modal('tags').show(@selected())
+      @button.selected.visible false
+      false
+
+
     clearSelected: =>
       Document.all().map (item) -> item.checked false
-
       @button.selected.visible false
+      false
+
 
     createDropzone: (dataId) =>
       for section in @section(dataId)

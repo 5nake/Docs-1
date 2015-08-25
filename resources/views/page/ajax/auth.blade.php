@@ -24,11 +24,11 @@
 
             <section class="box-group auth-social">
 
-                <span nd-click="auth" data-url="{{App\Api\RuDev::get()->getAuthLink()}}"
-                        class="button button-rudev">
+                <a href="#" nd-click="auth" data-url="{{App\Api\RuDev::get()->getAuthLink()}}"
+                        class="button button-orange button-rudev">
                     <span></span>
                     Вход
-                </span>
+                </a>
             </section>
         </div>
     </article>

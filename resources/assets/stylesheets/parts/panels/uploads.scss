@@ -1,33 +1,8 @@
 .upload-file-list {
   .item {
-    .upload-file-preview {
-      float: left;
-      position: relative;
-      left: -10px;
-      margin: 1px;
-      z-index: 3;
-
-      img {
-        border-radius: 2px;
-        background: #000;
-        width: 40px;
-        display: block;
-        height: 30px;
-      }
-    }
-
     .item-title {
-      float: left;
-      display: block;
       height: 23px;
       line-height: 23px;
-      position: relative;
-      z-index: 3;
-      font-size: 11px;
-      width: 218px;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
     }
 
     &:before {

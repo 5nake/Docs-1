@@ -1,6 +1,5 @@
-<article class="document" nd-click="check">
+<article class="document" nd-event="mousedown: check">
     <figure class="document-preview" nd-attr="style: 'background-image:url(' + preview() + ');'">
-
         <span class="checkbox" nd-attr="class: 'checkbox ' + (checked()?'checked':'')"></span>
     </figure>
 

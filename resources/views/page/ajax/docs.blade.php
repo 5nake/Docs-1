@@ -56,6 +56,19 @@
                 </td>
                 <td class="docs-container">
 
+                    <section class="window" nd-controller="WindowTagsController" nd-attr="class: classAttribute">
+                        <div class="window-padding">
+                            <article class="window-content">
+
+                                asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd
+                                asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd
+                                asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd
+                                asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd<br />asdasd
+                            </article>
+                        </div>
+
+                    </section>
+
                     <section class="docs-search">
                         <input type="text" data-bind="value: search.value, valueUpdate: 'input'" placeholder="Поиск" />
 
@@ -71,7 +84,7 @@
                         <!--/ko-->
                     </section>
 
-                    <section class="" nd-foreach="documents">
+                    <section class="document-container" nd-foreach="documents">
                         @include('partial.document')
                     </section>
 
