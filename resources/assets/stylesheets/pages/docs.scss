@@ -141,6 +141,7 @@
     height: 100%;
     min-height: 500px;
     @include box-sizing(content-box);
+    @include transition(width .3s $swift);
 
     &.content-push-show {
       width: 550px;
