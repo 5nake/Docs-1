@@ -1,5 +1,6 @@
-<!--ko if: button.selected.visible()-->
-<section class="panel selected-files-list">
+<section class="panel selected-files-list" nd-attr="class:
+    'panel selected-files-list ' + (button.selected.visible()?'visible':'')
+">
 
     <h2>
         <!--ko if: selected().length != 0-->
@@ -23,24 +24,10 @@
     <!--ko if: selected().length != 0-->
         <div class="footer-padding" style="height: 160px;"></div>
         <section class="footer">
-            <!--ko if: selected().length == 1-->
-                <a href="#" class="button button-green selected-file-open" title="Открыть"
-                    nd-click="console.log">Открыть</a>
-            <!--/ko-->
-            <!--ko if: selected().length != 1-->
-                <a href="#" class="button button-disabled selected-file-open" title="Открыть"
-                   nd-click="console.log">Открыть</a>
-            <!--/ko-->
-
-            <a href="#" class="button selected-file-tags" title="Добавить теги"
-                nd-click="tagsSelected">Добавить теги</a>
-
-            <a href="#" class="button button-orange selected-file-delete" title="Удалить"
-                nd-click="console.log">Удалить выделенное</a>
-
             <a href="#" class="button selected-file-checkout" title="Снять отметки"
                 nd-click="clearSelected">Снять выделения</a>
+            <a href="#" class="button button-orange selected-file-delete" title="Удалить"
+               nd-click="console.log"></a>
         </section>
     <!--/ko-->
 </section>
-<!--/ko-->

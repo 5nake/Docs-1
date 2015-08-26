@@ -1,5 +1,6 @@
-<!--ko if: button.uploads.visible()-->
-<section class="panel upload-file-list">
+<section class="panel upload-file-list" nd-attr="class:
+    'panel upload-file-list ' + (button.uploads.visible()?'visible':'')
+">
 
     <h2>
         <!--ko if: uploader.files().length != 0-->
@@ -47,4 +48,3 @@
         <!--/ko-->
     </section>
 </section>
-<!--/ko-->

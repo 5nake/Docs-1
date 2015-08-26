@@ -1,3 +1,6 @@
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .php
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews
@@ -7,6 +10,16 @@
 
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Gzip
+    RewriteCond %{HTTP:Accept-encoding} gzip
+    RewriteCond %{REQUEST_FILENAME}\.gz -s
+    RewriteRule ^(.*)\.(css|js|ttf|woff) $1\.$2\.gz [QSA]
+    RewriteRule \.css\.gz$ - [T=text/css,E=no-gzip:1,E=FORCE_GZIP]
+    RewriteRule \.js\.gz$ - [T=text/javascript,E=no-gzip:1,E=FORCE_GZIP]
+    RewriteRule \.woff\.gz$ - [T=application/font-woff,E=no-gzip:1,E=FORCE_GZIP]
+    RewriteRule \.ttf\.gz$ - [T=application/x-font-ttf,E=no-gzip:1,E=FORCE_GZIP]
+    Header set Content-Encoding gzip env=FORCE_GZIP
 
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d

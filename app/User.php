@@ -14,7 +14,7 @@ use Illuminate\Support\Collection;
  * Class User
  * @package App
  *
- * Active Record properties:
+ * Properties:
  *
  * @property-read int $id
  * @property string $login
@@ -28,8 +28,9 @@ use Illuminate\Support\Collection;
  * Relations:
  *
  * @property-read Collection<Document> $documents
+ *
  */
-class User extends Model implements
+class User extends \Eloquent implements
     AuthenticatableContract,
     CanResetPasswordContract
 {
@@ -38,25 +39,27 @@ class User extends Model implements
         CanResetPassword;
 
     /**
-     * The database table used by the model.
-     *
      * @var string
      */
     protected $table = 'users';
 
     /**
-     * The attributes that are mass assignable.
-     *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = [
+        'login',
+        'avatar',
+        'email',
+        'password',
+    ];
 
     /**
-     * The attributes excluded from the model's JSON form.
-     *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = [
+        'password',
+        'remember_token'
+    ];
 
     /**
      * @return BelongsTo
@@ -64,5 +67,13 @@ class User extends Model implements
     public function documents()
     {
         return $this->belongsTo(Document::class, 'id', 'user_id');
+    }
+
+    /**
+     * @param $password
+     */
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = \Hash::make($password);
     }
 }

@@ -59,6 +59,13 @@ class Document extends \Eloquent
     ];
 
     /**
+     * @var array
+     */
+    protected $hidden = [
+        'pivot'
+    ];
+
+    /**
      * @return HasOne
      */
     public function user()

@@ -37,6 +37,8 @@ namespace App:Controllers:
       }
       @button.uploads.visible.subscribe (visible) => @button.selected.visible(false) if visible
       @button.selected.visible.subscribe (visible) => @button.uploads.visible(false) if visible
+      @selected.subscribe (value) => @button.selected.visible(false) if @selected().length is 0
+
 
       # On created
       Document.created (document) =>
@@ -50,6 +52,7 @@ namespace App:Controllers:
             @selected.push document
           else
             @selected.remove (i) -> i.hash is document.hash
+
 
 
       # Uploader

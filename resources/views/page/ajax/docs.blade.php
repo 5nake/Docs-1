@@ -8,7 +8,9 @@
     </header>
 
     <main>
-        <aside class="docs-nav">
+        <aside class="docs-nav" nd-attr="class: 'docs-nav ' + (
+            (button.uploads.visible() || button.selected.visible())?'hidden':''
+        )">
             <article class="docs-header">
                 <a href="#" class="logo"></a>
             </article>
@@ -47,9 +49,7 @@
 
         <table class="content">
             <tr>
-                <td class="content-push" nd-attr="class: 'content-push ' + (
-                    (button.uploads.visible() || button.selected.visible())?'content-push-show':''
-                )">
+                <td class="content-push">
                     &nbsp;
                     @include('partial.panels.uploads')
                     @include('partial.panels.selected')
@@ -89,7 +89,7 @@
                     </section>
 
                     <!--ko if: documents().length == 0-->
-                    <h2>Файлов не найдено</h2>
+                        <h2>Файлов не найдено</h2>
                     <!--/ko-->
                 </td>
             </tr>

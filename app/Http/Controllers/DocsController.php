@@ -19,6 +19,7 @@ class DocsController extends AbstractController
     {
         return \Auth::user()
             ->documents()
+            ->with('tags')
             ->latest()
             ->get();
     }

@@ -21,7 +21,7 @@
     @include box-sizing(border-box);
 
     .header-push {
-      width: 250px;
+      width: 300px;
       float: left;
       height: inherit;
     }
@@ -115,7 +115,7 @@
   @import "parts/footer";
 
   .docs-nav {
-    width: 250px !important;
+    width: 300px !important;
     position: fixed;
     z-index: 998;
     left: 0;
@@ -124,6 +124,15 @@
     padding-right: 0;
     background: #474d57;
     overflow: auto;
+    @include transition(left .3s $swift);
+
+    &.hidden {
+      left: -300px;
+      .footer {
+        left: -300px;
+        @include transition(left .3s $swift);
+      }
+    }
 
     @import "parts/aside";
   }
@@ -137,17 +146,13 @@
 
   .content-push {
     position: relative;
-    width: 250px;
+    width: 300px;
     height: 100%;
     min-height: 500px;
     @include box-sizing(content-box);
     @include transition(width .3s $swift);
 
     @import "parts/panel";
-
-    &.content-push-show {
-      width: 550px;
-    }
 
     @import "parts/panels/selected";
     @import "parts/panels/uploads";

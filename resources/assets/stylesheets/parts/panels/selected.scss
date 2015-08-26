@@ -1,63 +1,55 @@
 .selected-files-list {
   .item {
-    img {
-      @include transition(.2s $swift);
-    }
-
     input[type=checkbox] {
-      @include gpu;
-      @include transition(.2s $swift);
-      opacity: .7;
       position: absolute;
-      left: 14px;
-      top: 9px;
+      left: 0;
+      top: 18px;
       z-index: 5;
       pointer-events: none;
-      box-shadow:
-        0 0 0 2px #8fce35,
-        0 0 0 1px rgba(#fff, 0);
+      box-shadow: 0 0 0 3px darken(#474d57, 5%);
+    }
+
+    &:after {
+      @include fa-icon;
+      content: $fa-var-play;
+      position: absolute;
+      right: 2px;
+      top: 12px;
+      color: #fff;
+      font-size: 7px;
+      opacity: 0;
     }
 
     &:hover {
-      img {
-        opacity: .6;
-      }
-
-      input[type=checkbox] {
+      &:after {
         opacity: 1;
-        box-shadow:
-          0 0 0 2px #8fce35,
-          0 0 0 9px rgba(#fff, .3);
+        right: 10px;
+        @include transition(.2s $swift);
+      }
+      input[type=checkbox] {
+        @include transition(.2s $swift);
+        box-shadow: 0 0 0 3px #8fce35;
       }
     }
   }
 
   .footer {
     a {
-      padding: 0;
       width: 130px;
+      padding: 0;
       margin: 5px !important;
     }
 
-    .selected-file-open {
-      &:before {
-        content: $fa-var-external-link;
-      }
-    }
-
-    .selected-file-tags {
-      &:before {
-        content: $fa-var-tag;
-      }
-    }
-
     .selected-file-delete {
+      width: 34px;
       &:before {
+        margin: 0 !important;
         content: $fa-var-trash-o;
       }
     }
 
     .selected-file-checkout {
+      width: 226px;
       &:before {
         content: $fa-var-times-circle;
       }
