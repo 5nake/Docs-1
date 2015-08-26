@@ -13,6 +13,7 @@ use App\Document\Formats\ArchiveDriver;
 use App\Document\Formats\AbstractDriver;
 use App\Document\Formats\BinariesDriver;
 use App\Document\Formats\PhotoshopDriver;
+use App\Document\Formats\DriverInterface;
 use App\Contracts\DocumentManagerContract;
 
 
@@ -28,7 +29,7 @@ class DocumentManager implements
     const DEFAULT_PATH  = '/img/formats/default.png';
 
     /**
-     * @var AbstractDriver[]
+     * @var AbstractDriver[]|DriverInterface[]
      */
     protected $drivers = [];
 
@@ -51,10 +52,10 @@ class DocumentManager implements
     }
 
     /**
-     * @param AbstractDriver $driver
+     * @param DriverInterface $driver
      * @return $this
      */
-    public function addDriver(AbstractDriver $driver)
+    public function addDriver(DriverInterface $driver)
     {
         $this->drivers[] = $driver;
 

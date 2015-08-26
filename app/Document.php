@@ -31,9 +31,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * Relations:
  *
  * @property-read User $user
+ * @property-read Tag[] $tags
  *
  */
-class Document extends Model
+class Document extends \Eloquent
 {
     const PERMISSIONS_PUBLIC  = 1;
     const PERMISSIONS_PRIVATE = 2;
@@ -41,7 +42,21 @@ class Document extends Model
     /**
      * @var string
      */
-    protected $table = 'files';
+    protected $table = 'documents';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'title',
+        'permissions',
+        'path',
+        'token',
+        'mime',
+        'size',
+        'preview',
+    ];
 
     /**
      * @return HasOne
@@ -49,6 +64,14 @@ class Document extends Model
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'documents_tags');
     }
 
     /**

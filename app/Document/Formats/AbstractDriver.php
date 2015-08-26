@@ -7,7 +7,7 @@ use App\Document;
  * Class AbstractDriver
  * @package App\Document\Formats
  */
-abstract class AbstractDriver
+abstract class AbstractDriver implements DriverInterface
 {
     /**
      * @var array

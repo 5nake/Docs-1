@@ -3,6 +3,7 @@ namespace App\Contracts;
 
 use App\Document;
 use App\Document\Formats\AbstractDriver;
+use App\Document\Formats\DriverInterface;
 
 /**
  * Interface DocumentManagerContract
@@ -11,10 +12,10 @@ use App\Document\Formats\AbstractDriver;
 interface DocumentManagerContract
 {
     /**
-     * @param AbstractDriver $driver
+     * @param DriverInterface $driver
      * @return mixed
      */
-    public function addDriver(AbstractDriver $driver);
+    public function addDriver(DriverInterface $driver);
 
     /**
      * @param callable $cb
